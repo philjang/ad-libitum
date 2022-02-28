@@ -54,169 +54,6 @@
           "text": "United States"
         }
       ]
-    },
-    {
-      "id": "poi.962072696597",
-      "type": "Feature",
-      "place_type": ["poi"],
-      "relevance": 0.99,
-      "properties": {
-        "foursquare": "5650f73a498e402a2a072beb",
-        "landmark": true,
-        "address": "43986 Pacific Commons Blvd",
-        "category": "juice bar, restaurant"
-      },
-      "text": "Bowl of Heaven",
-      "place_name": "Bowl of Heaven, 43986 Pacific Commons Blvd, Fremont, California 94538, United States",
-      "center": [-121.969145, 37.500919],
-      "geometry": {"coordinates": [-121.969145, 37.500919], "type": "Point"},
-      "context": [
-        {"id": "neighborhood.10534580001004340", "text": "Baylands"},
-        {"id": "postcode.13342989026196310", "text": "94538"},
-        {
-          "id": "place.8182364350628200",
-          "wikidata": "Q49220",
-          "text": "Fremont"
-        },
-        {
-          "id": "district.11187960009291250",
-          "wikidata": "Q107146",
-          "text": "Alameda County"
-        },
-        {
-          "id": "region.9803118085738010",
-          "short_code": "US-CA",
-          "wikidata": "Q99",
-          "text": "California"
-        },
-        {
-          "id": "country.19678805456372290",
-          "wikidata": "Q30",
-          "short_code": "us",
-          "text": "United States"
-        }
-      ]
-    },
-    {
-      "id": "poi.558345795475",
-      "type": "Feature",
-      "place_type": ["poi"],
-      "relevance": 0.99,
-      "properties": {
-        "foursquare": "4b1ee95ef964a520752124e3",
-        "landmark": true,
-        "address": "40645 Fremont Blvd",
-        "category": "bowling, bowl, bowling alley, leisure"
-      },
-      "text": "Cloverleaf Family Bowl",
-      "place_name": "Cloverleaf Family Bowl, 40645 Fremont Blvd, Fremont, California 94538, United States",
-      "center": [-121.965847, 37.535273],
-      "geometry": {"coordinates": [-121.965847, 37.535273], "type": "Point"},
-      "context": [
-        {"id": "neighborhood.14924020012307340", "text": "Irvington"},
-        {"id": "postcode.13342989026196310", "text": "94538"},
-        {
-          "id": "place.8182364350628200",
-          "wikidata": "Q49220",
-          "text": "Fremont"
-        },
-        {
-          "id": "district.11187960009291250",
-          "wikidata": "Q107146",
-          "text": "Alameda County"
-        },
-        {
-          "id": "region.9803118085738010",
-          "short_code": "US-CA",
-          "wikidata": "Q99",
-          "text": "California"
-        },
-        {
-          "id": "country.19678805456372290",
-          "wikidata": "Q30",
-          "short_code": "us",
-          "text": "United States"
-        }
-      ]
-    },
-    {
-      "id": "poi.309237748246",
-      "type": "Feature",
-      "place_type": ["poi"],
-      "relevance": 0.99,
-      "properties": {
-        "foursquare": "4c12af3b127f9521488b2425",
-        "landmark": true,
-        "address": "816 Joe Clifton Dr",
-        "category": "bowling, bowl, bowling alley, leisure"
-      },
-      "text": "Cardinal Lanes",
-      "place_name": "Cardinal Lanes, 816 Joe Clifton Dr, Fremont, Kentucky 42001, United States",
-      "center": [-88.636152, 37.082446],
-      "geometry": {"coordinates": [-88.636152, 37.082446], "type": "Point"},
-      "context": [
-        {"id": "neighborhood.10234474623635510", "text": "Clayshire"},
-        {"id": "postcode.5049848953797060", "text": "42001"},
-        {"id": "place.10337820373628200", "text": "Fremont"},
-        {
-          "id": "district.12527870970659510",
-          "wikidata": "Q506370",
-          "text": "McCracken County"
-        },
-        {
-          "id": "region.11038292189170890",
-          "short_code": "US-KY",
-          "wikidata": "Q1603",
-          "text": "Kentucky"
-        },
-        {
-          "id": "country.19678805456372290",
-          "wikidata": "Q30",
-          "short_code": "us",
-          "text": "United States"
-        }
-      ]
-    },
-    {
-      "id": "poi.1219770731751",
-      "type": "Feature",
-      "place_type": ["poi"],
-      "relevance": 0.99,
-      "properties": {
-        "foursquare": "4d28b65c6e27a143910a1d24",
-        "landmark": true,
-        "address": "1205 E 23rd St",
-        "category": "bowling, bowl, bowling alley, leisure"
-      },
-      "text": "30 Bowl",
-      "place_name": "30 Bowl, 1205 E 23rd St, Fremont, Nebraska 68025, United States",
-      "center": [-96.481126, 41.450999],
-      "geometry": {"coordinates": [-96.481126, 41.450999], "type": "Point"},
-      "context": [
-        {"id": "postcode.4365803748932660", "text": "68025"},
-        {
-          "id": "place.5325640978628200",
-          "wikidata": "Q653613",
-          "text": "Fremont"
-        },
-        {
-          "id": "district.3459535893257320",
-          "wikidata": "Q490703",
-          "text": "Dodge County"
-        },
-        {
-          "id": "region.13305404449987740",
-          "short_code": "US-NE",
-          "wikidata": "Q1553",
-          "text": "Nebraska"
-        },
-        {
-          "id": "country.19678805456372290",
-          "wikidata": "Q30",
-          "short_code": "us",
-          "text": "United States"
-        }
-      ]
     }
   ],
   "attribution": "NOTICE: © 2022 Mapbox and its suppliers. All rights reserved. Use of this data is subject to the Mapbox Terms of Service (https://www.mapbox.com/about/maps/). This response and the information it contains may not be retained. POI(s) provided by Foursquare."
@@ -248,6 +85,18 @@
 | DELETE | `/categories` | Deletes the specified category |
 
 ## Wireframes
+- Welcome Page
+![Welcome Page](public/img/Welcome.png)
+- User Page
+![User Page](public/img/Profile.png)
+- Restaurant/Categories List 
+![List Page](public/img/List.png)
+- Restaurant/Categories/Menu Item New
+![New Entry Page](public/img/New.png)
+- Restaurant Details Page
+![Details Page](public/img/Details.png)
+- Entry Edit Page
+![Entry Edit Page](public/img/Edit.png)
 
 ## User Stories
 - As a user, I want to save restaurants to a list so that I have a reference if I want to visit again.
