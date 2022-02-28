@@ -2,9 +2,10 @@
   "name": "pangs",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "apiCheck.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon -e .js,.json,.ejs"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,17 @@
   "bugs": {
     "url": "https://github.com/philjang/Pangs/issues"
   },
-  "homepage": "https://github.com/philjang/Pangs#readme"
+  "homepage": "https://github.com/philjang/Pangs#readme",
+  "dependencies": {
+    "axios": "^0.26.0",
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.6",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "express-ejs-layouts": "^2.5.1",
+    "pg": "^8.7.3",
+    "sequelize": "^6.17.0"
+  }
 }
