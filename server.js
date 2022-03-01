@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const ejsLayouts = require('express-ejs-layouts')
 const axios = require('axios')
+const db = require('./models')
 
 const cryptojs = require('crypto-js')
 const cookieParser = require('cookie-parser')

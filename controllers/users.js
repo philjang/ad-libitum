@@ -47,7 +47,7 @@ router.get('/login', (req,res) => {
 })
 
 router.get('/profile', (req,res) => {
-    res.render('users/profile')
+    res.render('users/profile', {error: 'Unrecognized user'})
 })
 
 router.post('/login', async (req,res) =>{
@@ -65,7 +65,7 @@ router.post('/login', async (req,res) =>{
             const encryptedUserId = cryptojs.AES.encrypt(user.id.toString(), process.env.SECRET)
             const encryptedUserIdString = encryptedUserId.toString()
             res.cookie('userId', encryptedUserIdString)
-            res.redirect('/')
+            res.redirect('/users/profile')
         }
     } catch (error) {
         console.log(error)
