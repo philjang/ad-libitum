@@ -3,11 +3,15 @@
     <% } %> 
 
 <form action="/users/login" method="post">
-    <label for="email">Email:</label>
-    <input type="email" name="email" id="email">
+   <div>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required>
+   </div>
 
-    <label for="password">Password:</label>
-    <input type="password" name="password" id="password">
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+    </div>
 
     <button type="submit">Log In</button>
 </form>
