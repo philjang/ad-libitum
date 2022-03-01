@@ -67,10 +67,24 @@ router.get('/edit/:id', async (req,res)=>{
 })
 
 // add new menu item
-router.post('/:id/', (req,res) => {
+router.post('/:id/', async (req,res) => {
     if (res.locals.currentUser) {
-        console.log('posted new menu to restaurant with id:'+req.params.id)
-        res.redirect(`/restaurants/${req.params.id}`)
+        try {
+            const [newMenu, wasCreated] = await db.menu.findOrCreate({
+                where: {
+                    name: req.body.name,
+                    restaurantId: req.params.id
+                },
+                defaults: {
+                    description: req.body.description,
+                    price: req.body.price
+                }
+            })
+            console.log(`User ${res.locals.currentUser.name} created a new menu item, ${newMenu}:(${wasCreated}), for the restaurant with id #${req.params.id}`)
+            res.redirect(`/restaurants/${req.params.id}`)
+        } catch (error) {
+            console.log(error)
+        }
     } else res.redirect('/')
 })
 
