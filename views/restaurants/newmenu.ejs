@@ -1,0 +1,19 @@
+<h3>New Menu</h3>
+<form action="/restaurants/<%= restaurantId %>" method="post">
+    <div>
+        <label for="name">Name:</label>
+        <input type="name" name="name" id="name" required>
+    </div>
+
+    <div>
+        <label for="description">Description:</label>
+        <textarea type="text area" name="description" id="description"></textarea>
+    </div>
+
+    <div>
+        <label for="price">Price:</label>
+        <input type="number" name="price" id="price">
+    </div>
+
+    <button type="submit">Add New Menu Item!</button>
+</form>

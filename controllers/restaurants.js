@@ -4,6 +4,7 @@ const router = express.Router()
 const db = require('../models')
 const axios = require('axios')
 
+// restaurant list page
 router.get('/', async (req,res)=>{
     try {
         const restaurants = await db.restaurant.findAll({
@@ -15,6 +16,7 @@ router.get('/', async (req,res)=>{
     }
 })
 
+// add new restaurant
 router.post('/', async (req,res) => {
     try {
         const [newRestaurant, wasCreated] = await db.restaurant.findOrCreate({
@@ -41,11 +43,13 @@ router.post('/', async (req,res) => {
     }
 })
 
+// new restaurant form
 router.get('/new', (req,res)=>{
     res.render('restaurants/new.ejs')
 })
 
-router.get('/edit/:id', (req,res)=>{
+// edit restaurant form
+router.get('/edit/:id', async (req,res)=>{
     try {
 
         res.render('restaurants/edit.ejs')
@@ -54,10 +58,29 @@ router.get('/edit/:id', (req,res)=>{
     }
 })
 
-router.get('/:id', (req,res)=>{
-    try {
+// add new menu item
+router.post('/:id/', (req,res) => {
+    console.log('posted new menu to restaurant with id:'+req.params.id)
+    res.redirect(`/restaurants/${req.params.id}`)
+})
 
-        res.render('restaurants/show.ejs')
+// new menu item form
+router.get('/:id/new', (req,res) => {
+    res.render('restaurants/newmenu.ejs', {restaurantId: req.params.id})
+})
+
+// restaurant details page
+router.get('/:id', async (req,res)=>{
+    try {
+        const selectedRestaurant = await db.restaurant.findOne({
+            where: {
+                id: req.params.id,
+                userId: res.locals.currentUser.id,
+            },
+            include: [db.menu]
+        })
+        const menuItems = selectedRestaurant.menus
+        res.render('restaurants/show.ejs', {menuArr: menuItems, selectedRestaurant})
     } catch (error) {
         console.log(error)
     }

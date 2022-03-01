@@ -1,1 +1,12 @@
-<h3>Restaurants Show</h3>
+<h3><%= selectedRestaurant.name %></h3> 
+<% if (menuArr[0]) { %>
+<ul>
+    <% menuArr.forEach(menuItem => { %>
+<h5><%= menuItem.name %></h5>
+<p>Description: <%= menuItem.description %></p>
+<p>Price: <%= menuItem.price %></p>
+    <% }) %>
+</ul>
+<% } else { %>
+<p>No Menu Highlights yet!</p>
+<% } %>
