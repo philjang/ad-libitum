@@ -35,6 +35,10 @@ app.get('/', (req,res)=> {
     res.render('home.ejs')
 })
 
+app.get('*', (req,res)=> {
+    res.send('404 page')
+})
+
 app.listen(PORT, () => {
     console.log(`Server is up and running on port ${PORT}`)
 })

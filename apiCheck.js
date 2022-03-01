@@ -8,8 +8,7 @@ app.set('view engine', 'ejs')
 
 app.get('/', async (req,res) => {
     const searchInput = "Fremont Bowl"
-    const retrievedJSON = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${searchInput}.json?types=address%2Cpoi&access_token=${process.env.MAPBOX_API_TOKEN}`
-    )
+    const retrievedJSON = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${searchInput}.json?types=address%2Cpoi&access_token=${process.env.MAPBOX_API_TOKEN}`)
     res.json(retrievedJSON.data)
 })
 

@@ -1,4 +1,11 @@
 <h3>Restaurants Index</h3>
+
+<ul>
+    <% restaurantArr.forEach(restaurant => { %>
+ <li><a href="/categories/<%= restaurant.id %>"><%= restaurant.name %> </a></li>
+    <% }) %>
+</ul>
+
 <div>
     <a href="/restaurants/new">Add New Restaurant</a>
 </div>
