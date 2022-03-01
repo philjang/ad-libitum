@@ -1,4 +1,11 @@
 <h3>Categories Index</h3>
+
+<ul>
+    <% categoryArr.forEach(category => { %>
+ <li><a href="/categories/<%= category.name %>"><%= category.name %> </a></li>
+    <% }) %>
+</ul>
+
 <div>
     <a href="/categories/new">Add New Category</a>
 </div>
