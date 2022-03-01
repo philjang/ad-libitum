@@ -1,4 +1,10 @@
-<h3><%= selectedRestaurant.name %></h3> 
+<h3><%= selectedRestaurant.name %></h3>
+<h4>Address: <%= selectedRestaurant.address %></h4> 
+<h4>Note: <%= selectedRestaurant.note %></h4> 
+<h4>Rating: <%= selectedRestaurant.rating %></h4> 
+
+<!-- map -->
+
 <% if (menuArr[0]) { %>
 <ul>
     <% menuArr.forEach(menuItem => { %>
@@ -10,3 +16,5 @@
 <% } else { %>
 <p>No Menu Highlights yet!</p>
 <% } %>
+
+<button>Add a New Favorite</button>
