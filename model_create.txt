@@ -1,0 +1,9 @@
+sequelize model:create --name user --attributes name:string,email:string,password:string
+
+sequelize model:create --name category --attributes userId:integer,name:string
+
+sequelize model:create --name restaurantsCategories --attributes restaurantId:integer,categoryId:integer
+
+sequelize model:create --name restaurant --attributes userId:integer,name:string,address:string,note:text,rating:integer,coordinates:geometry
+
+sequelize model:create --name menu --attributes restaurantId:integer,name:string,description:text,price:numeric
