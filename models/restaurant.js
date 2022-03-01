@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.restaurant.belongsTo(models.user)
+      models.restaurant.hasMany(models.menu, {onDelete: 'cascade'})
+      models.restaurant.belongsToMany(models.category, {through: "restaurantsCategories"})
     }
   }
   restaurant.init({

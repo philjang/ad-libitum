@@ -9,7 +9,18 @@
     <title>Pangs</title>
 </head>
 <body>
-    <h1>Pangs</h1>
+    <h1><a href="/">Pangs</a></h1>
+    <nav>
+        <ul>
+            <% if (currentUser) { %>
+                <li><a href="/users/profile">Profile</a></li>
+                <li><a href="/users/logout">Logout</a></li>
+            <% } else { %>
+            <li><a href="/users/new">Sign Up</a></li>
+            <li><a href="/users/login">Login</a></li>
+            <% } %> 
+        </ul>
+    </nav>
     <%- body %> 
 </body>
 </html>
