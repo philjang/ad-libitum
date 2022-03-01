@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 8000
 
 app.set('view engine', 'ejs')
 app.use(ejsLayouts)
+app.use('/',express.static('public'))
 app.use(cookieParser()) // req.cookies
 app.use(express.urlencoded({extended: false})) // req.body
 
@@ -27,6 +28,8 @@ app.use(async (req,res,next) => {
 })
 
 app.use('/users', require('./controllers/users.js'))
+app.use('/restaurants', require('./controllers/restaurants.js'))
+app.use('/categories', require('./controllers/categories.js'))
 
 app.get('/', (req,res)=> {
     res.render('home.ejs')
