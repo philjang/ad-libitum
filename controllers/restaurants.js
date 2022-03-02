@@ -115,4 +115,19 @@ router.get('/:id', async (req,res)=>{
     } else res.redirect('/')
 })
 
+// delete selected restaurant
+router.delete('/:id', async (req,res) => {
+    if(res.locals.currentUser) {
+        try {
+            const selectedRestaurant = await db.restaurant.findOne({
+                where: {id: req.params.id}
+            })
+            await selectedRestaurant.destroy()
+            res.redirect('/restaurants')
+        } catch (error) {
+            console.log(error)
+        }
+    } else res.redirect('/')
+})
+
 module.exports = router

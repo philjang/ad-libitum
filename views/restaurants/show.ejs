@@ -41,4 +41,7 @@
 <div>
     <a href="/restaurants/<%= selectedRestaurant.id %>/new">Add a New Favorite</a>
 </div>
+<form action="/restaurants/<%= selectedRestaurant.id %>/?_method=DELETE" method="post">
+    <button type="submit">Delete This Restaurant...</button>
+</form>
 </div>
