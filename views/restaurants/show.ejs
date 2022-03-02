@@ -2,25 +2,28 @@
 <h4>Address: <%= selectedRestaurant.address %></h4> 
 <h4>Note: <%= selectedRestaurant.note %></h4> 
 <h4>Rating: <%= selectedRestaurant.rating %></h4> 
+<div>
+    <a href="/restaurants/edit/<%= selectedRestaurant.id %>">Edit this Restaurant</a>
+</div>
 
 <!-- map -->
 <% if (selectedRestaurant.coordinates.coordinates[1] === 90) { %>
     <p><%= selectedRestaurant.coordinates.coordinates %></p>
-    <% } else { %>
-        <div id='map' style='width: 400px; height: 300px;'></div>
-        <script>
-            mapboxgl.accessToken = '<%= mapkey %>';
-            const map = new mapboxgl.Map({
-                container: 'map', // container ID
-                style: 'mapbox://styles/mapbox/streets-v11', // style URL
-                center: [<%=selectedRestaurant.coordinates.coordinates%>], // starting position [lng, lat]
-                zoom: 17 // starting zoom
-            });
-            const marker = new mapboxgl.Marker()
-            .setLngLat([<%=selectedRestaurant.coordinates.coordinates%>])
-            .addTo(map);
-        </script>
-    <% } %> 
+<% } else { %>
+    <div id='map' style='width: 400px; height: 300px;'></div>
+    <script>
+        mapboxgl.accessToken = '<%= mapkey %>';
+        const map = new mapboxgl.Map({
+            container: 'map', // container ID
+            style: 'mapbox://styles/mapbox/streets-v11', // style URL
+            center: [<%=selectedRestaurant.coordinates.coordinates%>], // starting position [lng, lat]
+            zoom: 17 // starting zoom
+        });
+        const marker = new mapboxgl.Marker()
+        .setLngLat([<%=selectedRestaurant.coordinates.coordinates%>])
+        .addTo(map);
+    </script>
+<% } %> 
 
 <% if (menuArr[0]) { %>
 <div class ="menu-container">
@@ -41,7 +44,7 @@
 <div>
     <a href="/restaurants/<%= selectedRestaurant.id %>/new">Add a New Favorite</a>
 </div>
-<form action="/restaurants/<%= selectedRestaurant.id %>/?_method=DELETE" method="post">
+<!-- <form action="/restaurants/<%# selectedRestaurant.id %>/?_method=DELETE" method="post">
     <button type="submit">Delete This Restaurant...</button>
-</form>
+</form> -->
 </div>

@@ -15,4 +15,5 @@ body {
 }
 #map {
     position: absolute;
+    left: 30%;
 }

@@ -59,8 +59,15 @@ router.get('/new', (req,res)=>{
 router.get('/edit/:id', async (req,res)=>{
     if (res.locals.currentUser) {
         try {
-            
-            res.render('restaurants/edit.ejs')
+            const selectedRestaurant = await db.restaurant.findOne({
+                where: {
+                    id: req.params.id,
+                    userId: res.locals.currentUser.id,
+                },
+                include: [db.menu]
+            })
+            const menuItems = selectedRestaurant.menus
+            res.render('restaurants/edit.ejs', {menuArr: menuItems, selectedRestaurant})
         } catch (error) {
             console.log(error)
         }
@@ -119,11 +126,24 @@ router.get('/:id', async (req,res)=>{
 router.delete('/:id', async (req,res) => {
     if(res.locals.currentUser) {
         try {
-            const selectedRestaurant = await db.restaurant.findOne({
+            await db.restaurant.destroy({
                 where: {id: req.params.id}
             })
-            await selectedRestaurant.destroy()
             res.redirect('/restaurants')
+        } catch (error) {
+            console.log(error)
+        }
+    } else res.redirect('/')
+})
+
+// delete selected menu item
+router.delete('/:restaurantId/:menuId', async (req,res) => {
+    if(res.locals.currentUser) {
+        try {
+            await db.menu.destroy({
+                where: {id: req.params.menuId}
+            })
+            res.redirect(`/restaurants/edit/${req.params.restaurantId}`)
         } catch (error) {
             console.log(error)
         }

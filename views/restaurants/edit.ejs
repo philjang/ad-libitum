@@ -1,1 +1,33 @@
-<h3>Restaurants Edit</h3>
+<h3>Editing <%= selectedRestaurant.name %></h3>
+<h4>Address: <%= selectedRestaurant.address %></h4> 
+<h4>Note: <%= selectedRestaurant.note %></h4> 
+<h4>Rating: <%= selectedRestaurant.rating %></h4> 
+<div>
+    <a href="/restaurants/<%= selectedRestaurant.id %>">Done Editing</a>
+</div>
+
+<% if (menuArr[0]) { %>
+    <div class ="menu-container">
+    <div class="menu">
+        <ul>
+            <% menuArr.forEach(menuItem => { %>
+            <h4><%= menuItem.name %></h4>
+            <p>Description: <%= menuItem.description %></p>
+            <p>Price: $<%= menuItem.price %></p>
+
+            <form action="/restaurants/<%=selectedRestaurant.id%>/<%=menuItem.id%>/?_method=DELETE" method="post">
+                <button type="submit">Delete This Item...</button>
+            </form>
+            
+            <% }) %>
+        </ul>
+    </div>
+<% } else { %>
+    <div class ="menu-container">
+    <div class="no-menu"><p>No Menu Highlights to Delete!</p></div>
+<% } %>
+    
+    <form action="/restaurants/<%= selectedRestaurant.id %>/?_method=DELETE" method="post">
+        <button type="submit">Delete This Restaurant...</button>
+    </form>
+    </div>
