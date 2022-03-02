@@ -131,8 +131,10 @@ router.get('/:id/addcategory', async (req,res)=>{
                 where: {id: req.params.id}
             })
             const categories = await db.category.findAll({
-                where: {userId: res.locals.currentUser.id}
+                where: {userId: res.locals.currentUser.id},
+                include: [db.restaurant]
             })
+            // let ejsOption = {async: true}
             res.render('restaurants/addcategory.ejs', {selectedRestaurant, categoryArr: categories})
         } catch (error) {
             console.log(error)
@@ -158,6 +160,26 @@ router.post('/:id/addcategory', async (req,res)=>{
             console.log(`User ${res.locals.currentUser.name} created a new category, ${newCategory.name}: ${wasCreated} and linked to ${foundRestaurant.name}`);
             // console.log(foundRestaurant,resCat)
             res.redirect(`/restaurants/${req.params.id}/addcategory`);
+        } catch (error) {
+            console.log(error);
+        }
+    } else res.redirect('/')
+})
+
+// unassociated restaurant from existing category route
+router.post('/:id/rmfrom/:categoryId', async (req,res) => {
+    if (res.locals.currentUser) {
+        try {
+            const selectedCategory = await db.category.findOne({
+                where: {id: req.params.categoryId}
+            })
+            const foundRestaurant = await db.restaurant.findOne({
+                where: {id: req.params.id}
+            })
+            await selectedCategory.removeRestaurant(foundRestaurant)
+            const resCat = await foundRestaurant.getCategories()
+            console.log(foundRestaurant, resCat)
+            res.redirect(`/restaurants/${req.params.id}/addcategory`)
         } catch (error) {
             console.log(error);
         }

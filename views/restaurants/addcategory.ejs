@@ -3,9 +3,32 @@
 <ul>
     <% categoryArr.forEach(category => { %>
  <li><%= category.name %></li>
- <form action="/restaurants/<%=selectedRestaurant.id%>/addto/<%=category.id%>" method="post">
-    <button type="submit">Add <%= selectedRestaurant.name %> to <%= category.name %> </button>
-</form>
+ <% if(category.restaurants[0]){ %> 
+    <% category.restaurants.forEach(restaurant => { %>
+        <% if(restaurant.id === selectedRestaurant.id) { %> 
+            <form action="/restaurants/<%=selectedRestaurant.id%>/rmfrom/<%=category.id%>" method="post">
+                <button type="submit">Remove <%= selectedRestaurant.name %> from <%= category.name %> </button>
+            </form>
+        <% } %>
+
+    <% }) %>
+ <% } %> 
+
+ <!-- simplify later if possible -->
+    <% if(category.restaurants[0]) { %> 
+        <% for (let i=0;i<category.restaurants.length; i++) { %> 
+            <% if(category.restaurants[i].id === selectedRestaurant.id) {break; %>
+            <% } else if (i===category.restaurants.length-1) { %>
+                <form action="/restaurants/<%=selectedRestaurant.id%>/addto/<%=category.id%>" method="post">
+                    <button type="submit">Add <%= selectedRestaurant.name %> to <%= category.name %> </button>
+                </form>
+            <% } %> 
+        <% } %> 
+    <% } else { %>
+        <form action="/restaurants/<%=selectedRestaurant.id%>/addto/<%=category.id%>" method="post">
+            <button type="submit">Add <%= selectedRestaurant.name %> to <%= category.name %> </button>
+        </form>
+    <% } %> 
     <% }) %>
 </ul>
 

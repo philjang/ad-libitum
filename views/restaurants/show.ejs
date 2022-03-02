@@ -8,13 +8,16 @@
     <% categoryArr.forEach(category => { %>
  <li><a href="/categories/<%= category.name %>"><%= category.name %> </a></li>
     <% }) %>
+    <% if(!selectedRestaurant.categories[0]) { %> 
+    <li>No Associated Categories Yet</li>
+    <% } %> 
 </ul>
 
 <div>
-    <a href="/restaurants/edit/<%= selectedRestaurant.id %>">Edit this Restaurant</a>
+    <a href="/restaurants/<%= selectedRestaurant.id %>/addcategory">Add <%= selectedRestaurant.name %> to a Category</a>
 </div>
 <div>
-    <a href="/restaurants/<%= selectedRestaurant.id %>/addcategory">Add <%= selectedRestaurant.name %> to a Category</a>
+    <a href="/restaurants/edit/<%= selectedRestaurant.id %>">Edit this Restaurant</a>
 </div>
 
 
