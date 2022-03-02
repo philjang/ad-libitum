@@ -4,19 +4,41 @@
 <h4>Rating: <%= selectedRestaurant.rating %></h4> 
 
 <!-- map -->
+<% if (selectedRestaurant.coordinates.coordinates[1] === 90) { %>
+    <p><%= selectedRestaurant.coordinates.coordinates %></p>
+    <% } else { %>
+        <div id='map' style='width: 400px; height: 300px;'></div>
+        <script>
+            mapboxgl.accessToken = '<%= mapkey %>';
+            const map = new mapboxgl.Map({
+                container: 'map', // container ID
+                style: 'mapbox://styles/mapbox/streets-v11', // style URL
+                center: [<%=selectedRestaurant.coordinates.coordinates%>], // starting position [lng, lat]
+                zoom: 17 // starting zoom
+            });
+            const marker = new mapboxgl.Marker()
+            .setLngLat([<%=selectedRestaurant.coordinates.coordinates%>])
+            .addTo(map);
+        </script>
+    <% } %> 
 
 <% if (menuArr[0]) { %>
-<ul>
-    <% menuArr.forEach(menuItem => { %>
-<h4><%= menuItem.name %></h4>
-<p>Description: <%= menuItem.description %></p>
-<p>Price: $<%= menuItem.price %></p>
-    <% }) %>
-</ul>
+<div class ="menu-container">
+<div class="menu">
+    <ul>
+        <% menuArr.forEach(menuItem => { %>
+    <h4><%= menuItem.name %></h4>
+    <p>Description: <%= menuItem.description %></p>
+    <p>Price: $<%= menuItem.price %></p>
+        <% }) %>
+    </ul>
+</div>
 <% } else { %>
-<p>No Menu Highlights yet!</p>
+<div class ="menu-container">
+<div class="no-menu"><p>No Menu Highlights yet!</p></div>
 <% } %>
 
 <div>
     <a href="/restaurants/<%= selectedRestaurant.id %>/new">Add a New Favorite</a>
+</div>
 </div>

@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="/js/script.js"></script>
-    <title>Pangs</title>
-</head>
-<body>
-    <h1><a href="/">Pangs</a></h1>
-    <nav>
-        <ul>
-            <% if (currentUser) { %>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
+        <link href="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css" rel="stylesheet" />
+
+        <link rel="stylesheet" href="/css/style.css" />
+        <script src="/js/script.js"></script>
+        <title>Pangs</title>
+    </head>
+    <body>
+        <h1><a href="/">Pangs</a></h1>
+        <nav>
+            <ul>
+                <% if (currentUser) { %>
                 <li><a href="/users/profile">Profile</a></li>
                 <li><a href="/users/logout">Logout</a></li>
                 <li><a href="/restaurants/">Restaurants</a></li>
                 <li><a href="/categories/">Categories</a></li>
 
-            <% } else { %>
-            <li><a href="/users/new">Sign Up</a></li>
-            <li><a href="/users/login">Login</a></li>
-            <% } %> 
-        </ul>
-    </nav>
-    <%- body %> 
-</body>
+                <% } else { %>
+                <li><a href="/users/new">Sign Up</a></li>
+                <li><a href="/users/login">Login</a></li>
+                <% } %>
+            </ul>
+        </nav>
+        <%- body %>
+    </body>
 </html>

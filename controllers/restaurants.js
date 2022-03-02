@@ -30,7 +30,8 @@ router.post('/', async (req,res) => {
                 defaults: {
                     address: req.body.address,
                     note: req.body.note,
-                    rating: req.body.rating
+                    rating: req.body.rating,
+                    coordinates: {type: 'Point', coordinates: [135,90]}
                 }
             })
             console.log(`User ${res.locals.currentUser.name} created a new restaurant, ${newRestaurant.name}: ${wasCreated}`)
@@ -107,7 +108,7 @@ router.get('/:id', async (req,res)=>{
                 include: [db.menu]
             })
             const menuItems = selectedRestaurant.menus
-            res.render('restaurants/show.ejs', {menuArr: menuItems, selectedRestaurant})
+            res.render('restaurants/show.ejs', {menuArr: menuItems, selectedRestaurant,mapkey: process.env.MAPBOX_API_TOKEN})
         } catch (error) {
             console.log(error)
         }
