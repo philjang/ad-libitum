@@ -2,6 +2,14 @@
 <h4>Address: <%= selectedRestaurant.address %></h4> 
 <h4>Note: <%= selectedRestaurant.note %></h4> 
 <h4>Rating: <%= selectedRestaurant.rating %></h4> 
+<h4>Associated Categories:</h4>
+
+<ul>
+    <% categoryArr.forEach(category => { %>
+ <li><a href="/categories/<%= category.name %>"><%= category.name %> </a></li>
+    <% }) %>
+</ul>
+
 <div>
     <a href="/restaurants/edit/<%= selectedRestaurant.id %>">Edit this Restaurant</a>
 </div>

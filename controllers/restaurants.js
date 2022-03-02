@@ -112,10 +112,11 @@ router.get('/:id', async (req,res)=>{
                     id: req.params.id,
                     userId: res.locals.currentUser.id,
                 },
-                include: [db.menu]
+                include: [db.menu,db.category]
             })
             const menuItems = selectedRestaurant.menus
-            res.render('restaurants/show.ejs', {menuArr: menuItems, selectedRestaurant,mapkey: process.env.MAPBOX_API_TOKEN})
+            const associatedCategories = selectedRestaurant.categories
+            res.render('restaurants/show.ejs', {menuArr: menuItems, categoryArr: associatedCategories,selectedRestaurant,mapkey: process.env.MAPBOX_API_TOKEN})
         } catch (error) {
             console.log(error)
         }
