@@ -5,6 +5,10 @@
 <div>
     <a href="/restaurants/edit/<%= selectedRestaurant.id %>">Edit this Restaurant</a>
 </div>
+<div>
+    <a href="/restaurants/<%= selectedRestaurant.id %>/addcategory">Add <%= selectedRestaurant.name %> to a Category</a>
+</div>
+
 
 <!-- map -->
 <% if (selectedRestaurant.coordinates.coordinates[1] === 90) { %>

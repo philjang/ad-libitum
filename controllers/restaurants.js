@@ -122,6 +122,52 @@ router.get('/:id', async (req,res)=>{
     } else res.redirect('/')
 })
 
+// pick or add new category form
+router.get('/:id/addcategory', async (req,res)=>{
+    if(res.locals.currentUser) {
+        try {
+            const selectedRestaurant = await db.restaurant.findOne({
+                where: {id: req.params.id}
+            })
+            const categories = await db.category.findAll({
+                where: {userId: res.locals.currentUser.id}
+            })
+            res.render('restaurants/addcategory.ejs', {selectedRestaurant, categoryArr: categories})
+        } catch (error) {
+            console.log(error)
+        }
+    } else res.redirect('/')
+})
+
+// associate restaurant to new category route
+router.post('/:id/addcategory', async (req,res)=>{
+    if (res.locals.currentUser) {
+        try {
+            const [newCategory, wasCreated] = await db.category.findOrCreate({
+                where: {
+                    name: req.body.name,
+                    userId: res.locals.currentUser.id,
+                },
+            });
+            const foundRestaurant = await db.restaurant.findOne({
+                where: {id: req.params.id}
+            })
+            await newCategory.addRestaurant(foundRestaurant)
+            // const resCat = await foundRestaurant.getCategories()
+            console.log(`User ${res.locals.currentUser.name} created a new category, ${newCategory.name}: ${wasCreated} and linked to ${foundRestaurant.name}`);
+            // console.log(foundRestaurant,resCat)
+            res.redirect(`/restaurants/${req.params.id}/addcategory`);
+        } catch (error) {
+            console.log(error);
+        }
+    } else res.redirect('/')
+})
+
+// associate restaurant to existing category route
+router.post('/:id/addto/:categoryId', (req,res)=>{
+    console.log("you've hit the post route")
+})
+
 // delete selected restaurant
 router.delete('/:id', async (req,res) => {
     if(res.locals.currentUser) {

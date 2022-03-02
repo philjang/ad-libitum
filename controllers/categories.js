@@ -65,13 +65,12 @@ router.get('/:name', async (req, res) => {
 router.delete('/:name', async (req,res) => {
     if(res.locals.currentUser) {
         try {
-            const selectedCategory = await db.category.findOne({
+            await db.category.destroy({
                 where: {
                     name: req.params.name,
                     userId: res.locals.currentUser.id
                 }
             })
-            await selectedCategory.destroy()
             res.redirect('/categories')
         } catch (error) {
             console.log(error)

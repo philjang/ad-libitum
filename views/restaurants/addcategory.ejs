@@ -1,0 +1,22 @@
+<h3>Pick from Below or Add a New Category</h3>
+
+<ul>
+    <% categoryArr.forEach(category => { %>
+ <li><%= category.name %></li>
+ <form action="/<%=selectedRestaurant.id%>/addto/<%=category.id%>" method="post">
+    <button type="submit">Add <%= selectedRestaurant.name %> to <%= category.name %> </button>
+</form>
+    <% }) %>
+</ul>
+
+<form action="/restaurants/<%=selectedRestaurant.id%>/addcategory" method="post">
+    <div>
+        <label for="name">New Category Name:</label>
+        <input type="name" name="name" id="name" required>
+    </div>
+    <button type="submit">Add <%=selectedRestaurant.name%> to this New Category</button>
+</form>
+
+<div>
+    <a href="/restaurants/<%= selectedRestaurant.id %>">Back to <%= selectedRestaurant.name %> Details Page</a>
+</div>
