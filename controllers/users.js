@@ -5,10 +5,12 @@ const bcrypt = require('bcrypt')
 const cryptojs = require('crypto-js')
 require('dotenv').config()
 
+// new user form
 router.get('/new', (req,res)=>{
     res.render('users/new.ejs')
 })
 
+// add new user
 router.post('/', async (req,res) => {
     try {
         const [newUser, created] = await db.user.findOrCreate({
@@ -42,14 +44,17 @@ router.post('/', async (req,res) => {
     }
 })
 
+// login form
 router.get('/login', (req,res) => {
     res.render('users/login.ejs', {error: null})
 })
 
+// user home page
 router.get('/profile', (req,res) => {
     res.render('users/profile', {error: 'Unrecognized user'})
 })
 
+// log in user
 router.post('/login', async (req,res) =>{
     try {
         const user = await db.user.findOne({where: {email:req.body.email}})
@@ -72,6 +77,7 @@ router.post('/login', async (req,res) =>{
     }
 })
 
+// log out user
 router.get('/logout', (req,res) => {
     console.log('logging out')
     res.clearCookie('userId')

@@ -96,7 +96,7 @@ router.get('/:id/new', (req,res) => {
     } else res.redirect('/')
 })
 
-// restaurant details page
+// restaurant details page with list of menu highlights
 router.get('/:id', async (req,res)=>{
     if (res.locals.currentUser) {
         try {

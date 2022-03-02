@@ -3,9 +3,9 @@ const express = require('express')
 const ejsLayouts = require('express-ejs-layouts')
 const axios = require('axios')
 const db = require('./models')
-
 const cryptojs = require('crypto-js')
 const cookieParser = require('cookie-parser')
+const methodOverride = require('method-override')
 
 const app = express()
 const PORT = process.env.PORT || 8000 
@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 8000
 app.set('view engine', 'ejs')
 app.use(ejsLayouts)
 app.use('/',express.static('public'))
+app.use(methodOverride('_method')) // allows PUT AND DELETE using POST form, must be above other middleware using req
 app.use(cookieParser()) // req.cookies
 app.use(express.urlencoded({extended: false})) // req.body
 

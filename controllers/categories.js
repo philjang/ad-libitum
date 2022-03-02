@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models');
 
+// categories list page
 router.get('/', async (req, res) => {
     if (res.locals.currentUser) {
         try {
@@ -16,6 +17,7 @@ router.get('/', async (req, res) => {
     } else res.redirect('/')
 });
 
+// add new category
 router.post('/', async (req, res) => {
     if (res.locals.currentUser) {
         try {
@@ -32,13 +34,15 @@ router.post('/', async (req, res) => {
         }
     } else res.redirect('/')
 });
-    
+   
+// new restaurant form
 router.get('/new', (req, res) => {
     if (res.locals.currentUser) {
         res.render('categories/new.ejs');
     } else res.redirect('/')
 });
 
+// category details page with list of restaurants
 router.get('/:name', async (req, res) => {
     if (res.locals.currentUser) {
         try {
