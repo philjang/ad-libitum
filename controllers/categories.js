@@ -61,4 +61,19 @@ router.get('/:name', async (req, res) => {
     } else res.redirect('/')
 });
 
+// delete selected category
+router.delete('/:name', async (req,res) => {
+    if(res.locals.currentUser) {
+        try {
+            const selectedCategory = await db.category.findOne({
+                where: {name: req.params.name}
+            })
+            await selectedCategory.destroy()
+            res.redirect('/categories')
+        } catch (error) {
+            console.log(error)
+        }
+    } else res.redirect('/')
+})
+
 module.exports = router;

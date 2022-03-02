@@ -4,3 +4,7 @@
  <li><a href="/restaurants/<%= restaurant.id %>"><%= restaurant.name %> </a></li>
     <% }) %>
 </ul>
+
+<form action="/categories/<%= selectedCategory.name %>/?_method=DELETE" method="post">
+<button type="submit">Delete This Category...</button>
+</form>
