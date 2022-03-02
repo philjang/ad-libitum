@@ -164,8 +164,23 @@ router.post('/:id/addcategory', async (req,res)=>{
 })
 
 // associate restaurant to existing category route
-router.post('/:id/addto/:categoryId', (req,res)=>{
-    console.log("you've hit the post route")
+router.post('/:id/addto/:categoryId', async (req,res)=>{
+    if (res.locals.currentUser) {
+        try {
+            const selectedCategory = await db.category.findOne({
+                where: {id: req.params.categoryId}
+            })
+            const foundRestaurant = await db.restaurant.findOne({
+                where: {id: req.params.id}
+            })
+            await selectedCategory.addRestaurant(foundRestaurant)
+            const resCat = await foundRestaurant.getCategories()
+            console.log(foundRestaurant,resCat)
+            res.redirect(`/restaurants/${req.params.id}/addcategory`)
+        } catch (error) {
+            console.log(error);
+        }
+    } else res.redirect('/')
 })
 
 // delete selected restaurant

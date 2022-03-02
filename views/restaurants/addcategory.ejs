@@ -3,7 +3,7 @@
 <ul>
     <% categoryArr.forEach(category => { %>
  <li><%= category.name %></li>
- <form action="/<%=selectedRestaurant.id%>/addto/<%=category.id%>" method="post">
+ <form action="/restaurants/<%=selectedRestaurant.id%>/addto/<%=category.id%>" method="post">
     <button type="submit">Add <%= selectedRestaurant.name %> to <%= category.name %> </button>
 </form>
     <% }) %>
