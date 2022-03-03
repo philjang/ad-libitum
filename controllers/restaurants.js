@@ -55,6 +55,25 @@ router.get('/new', (req,res)=>{
     } else res.redirect('/')
 })
 
+// edit restaurant PUT
+router.put('/:id', async (req,res)=>{
+    if (res.locals.currentUser) {
+        try {
+            await db.restaurant.update({
+                name: req.body.name,
+                address: req.body.address,
+                note: req.body.note,
+                rating: req.body.rating
+            },{
+                where: {id: req.params.id}
+            })
+            res.redirect(`/restaurants/${req.params.id}`)
+        } catch (error) {
+            console.log(error)
+        }
+    } else res.redirect('/')
+})
+
 // edit restaurant form
 router.get('/edit/:id', async (req,res)=>{
     if (res.locals.currentUser) {
