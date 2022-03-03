@@ -1,5 +1,5 @@
 body {
-    background-color: powderblue;
+    background-color: lightgray;
 }
 
 .menu-container{
@@ -8,12 +8,12 @@ body {
     align-items: flex-end;
 }
 .menu {
-    background-color: lightgray;
+    /* background-color: lightgray; */
 }
 .no-menu{
-    background-color: white;
+    /* background-color: white; */
 }
 #map {
-    position: absolute;
-    left: 30%;
+    /* position: absolute;
+    left: 30%; */
 }
