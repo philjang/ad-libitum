@@ -15,3 +15,7 @@ app.get('/', async (req,res) => {
 app.listen(PORT, () => {
     console.log(`Server is up and running on port ${PORT}`)
 })
+
+<div><%= feature.text %> </div>
+<div><%= `${feature.context[0].text}, ${feature.context[2].text}, ${feature.context[1].text}` %> </div>
+<div>address: <%= feature.properties.address %> </div>

@@ -3,6 +3,7 @@ const express = require('express')
 const router = express.Router()
 const db = require('../models')
 const axios = require('axios')
+const res = require('express/lib/response')
 
 // restaurant list page
 router.get('/', async (req,res)=>{
@@ -34,7 +35,7 @@ router.post('/', async (req,res) => {
                     coordinates: {type: 'Point', coordinates: [135,90]}
                 }
             })
-            console.log(`User ${res.locals.currentUser.name} created a new restaurant, ${newRestaurant.name}: ${wasCreated}`)
+            console.log(`User ${res.locals.currentUser.name} created a new restaurant, ${newRestaurant.name}: ${wasCreated}`.brightCyan)
             const retrievedJSON = await axios.get("https://api.mapbox.com/geocoding/v5/mapbox.places/"+newRestaurant.name+" "+newRestaurant.address+".json?types=address%2Cpoi&access_token="+process.env.MAPBOX_API_TOKEN)
             // console.log(retrievedJSON.data.features[0].center)
             const point = await {type: 'Point', coordinates: retrievedJSON.data.features[0].center}
@@ -93,6 +94,49 @@ router.get('/edit/:id', async (req,res)=>{
     } else res.redirect('/')
 })
 
+// search for new map
+router.get('/:id/map', async (req,res) => {
+    if (res.locals.currentUser) {
+        const foundRestaurant = await db.restaurant.findOne({
+            where: {id: req.params.id}
+        })
+        res.render('restaurants/map.ejs', {restaurantId: foundRestaurant.id, restaurantName: foundRestaurant.name})
+    } else res.redirect('/')
+})
+
+// display map search results
+router.get('/mapresults', async (req,res) => {
+    if (res.locals.currentUser) {
+        try {
+            const retrievedJSON = await axios.get("https://api.mapbox.com/geocoding/v5/mapbox.places/"+req.query.name+" "+req.query.address+".json?limit=10&types=address%2Cpoi&access_token="+process.env.MAPBOX_API_TOKEN)
+            const resultsArr = retrievedJSON.data.features
+            // console.log(resultsArr)
+            // console.log(retrievedJSON)
+            res.render('restaurants/mapresults.ejs', {resultsArr, restaurantId: req.query.id})
+        } catch (error) {
+            console.log(error)
+        }
+    } else res.redirect('/')
+})
+
+// update coordinates
+router.put('/:id/map', async (req,res) => {
+    if (res.locals.currentUser) {
+        try {
+            // const point = {type: 'Point', coordinates: [req.body.lon, req.body.lat]}
+            await db.restaurant.update({
+                coordinates: {type: 'Point', coordinates: [req.body.lon, req.body.lat]}
+            }, {
+                where: {id: req.params.id}
+            })
+            console.log(`restaurant with id #${req.params.id} updated with new coordinates: ${req.body.lon}, ${req.body.lat}`.brightCyan)
+            res.redirect(`/restaurants/${req.params.id}`)
+        } catch (error) {
+            console.log(error)
+        }
+    } else res.redirect('/')
+})
+
 // add new menu item
 router.post('/:id/', async (req,res) => {
     if (res.locals.currentUser) {
@@ -108,7 +152,7 @@ router.post('/:id/', async (req,res) => {
                 }
             })
             console.log(`User ${res.locals.currentUser.name} created a new menu item, ${newMenu}:(${wasCreated}), for the restaurant with id #${req.params.id}`)
-            res.redirect(`/restaurants/${req.params.id}`)
+            res.redirect(`/restaurants/${req.params.id}`.brightCyan)
         } catch (error) {
             console.log(error)
         }
@@ -116,7 +160,7 @@ router.post('/:id/', async (req,res) => {
 })
 
 // new menu item form
-router.get('/:id/new', (req,res) => {
+router.get('/:id/newmenu', (req,res) => {
     if (res.locals.currentUser) {
         res.render('restaurants/newmenu.ejs', {restaurantId: req.params.id})
     } else res.redirect('/')
@@ -176,7 +220,7 @@ router.post('/:id/addcategory', async (req,res)=>{
             })
             await newCategory.addRestaurant(foundRestaurant)
             // const resCat = await foundRestaurant.getCategories()
-            console.log(`User ${res.locals.currentUser.name} created a new category, ${newCategory.name}: ${wasCreated} and linked to ${foundRestaurant.name}`);
+            console.log(`User ${res.locals.currentUser.name} created a new category, ${newCategory.name}: ${wasCreated} and linked to ${foundRestaurant.name}`.brightCyan);
             // console.log(foundRestaurant,resCat)
             res.redirect(`/restaurants/${req.params.id}/addcategory`);
         } catch (error) {

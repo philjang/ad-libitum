@@ -6,6 +6,8 @@ const db = require('./models')
 const cryptojs = require('crypto-js')
 const cookieParser = require('cookie-parser')
 const methodOverride = require('method-override')
+const colors = require('colors')
+
 
 const app = express()
 const PORT = process.env.PORT || 8000 

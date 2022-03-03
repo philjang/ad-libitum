@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
                     userId: res.locals.currentUser.id,
                 },
             });
-            console.log(`User ${res.locals.currentUser.name} created a new category, ${newCategory.name}: ${wasCreated}`);
+            console.log(`User ${res.locals.currentUser.name} created a new category, ${newCategory.name}: ${wasCreated}`.brightCyan);
             res.redirect('/categories');
         } catch (error) {
             console.log(error);

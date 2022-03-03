@@ -1,0 +1,15 @@
+<h3>Search for the Right Place</h3>
+
+<form action="/restaurants/mapresults" method="get">
+    <div>
+        <label for="name">Name:</label>
+        <input type="name" name="name" id="name" placeholder="<%=restaurantName%>" required>
+    </div>
+
+    <div>
+        <label for="address">Address:</label>
+        <input type="text" name="address" id="address">
+    </div>
+    <input type="hidden" name="id" value="<%=restaurantId%>">
+    <button type="submit">Search</button>
+</form>
