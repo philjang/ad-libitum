@@ -4,6 +4,9 @@ body {
 em {
     color:white;
 }
+input {
+    text-align: center;
+}
 
 .menu-container{
     display: flex;
