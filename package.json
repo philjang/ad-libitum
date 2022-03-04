@@ -31,6 +31,7 @@
     "mapbox-gl": "^2.7.0",
     "method-override": "^3.0.0",
     "pg": "^8.7.3",
-    "sequelize": "^6.17.0"
+    "sequelize": "^6.17.0",
+    "sequelize-cli": "^6.4.1"
   }
 }
