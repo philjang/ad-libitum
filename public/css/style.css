@@ -53,7 +53,19 @@ input {
 .no-menu{
     /* background-color: white; */
 }
+
+
 #map {
     /* position: absolute; */
-    left: 10%;
+    /* left: 10%; */
+    width: 64vw; 
+    height: 48vw;
+}
+@media (min-width: 768px) {
+    #map {
+        /* position: absolute; */
+        /* left: 10%; */
+        width: 32vw; 
+        height: 24vw;
+    }
 }

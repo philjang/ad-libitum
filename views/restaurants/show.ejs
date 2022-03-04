@@ -122,7 +122,9 @@
             <% if (selectedRestaurant.coordinates.coordinates[1] === 90) { %>
                 <p><%= selectedRestaurant.coordinates.coordinates %></p>
             <% } else { %>
-                <div id='map' style='width: 400px; height: 300px;'></div>
+                <div class="row justify-content-center pt-3">
+                    <div id='map'></div>
+                </div>
                 <script>
                     mapboxgl.accessToken = '<%= mapkey %>';
                     const map = new mapboxgl.Map({
