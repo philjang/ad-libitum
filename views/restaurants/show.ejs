@@ -64,23 +64,26 @@
             <!-- Associated Categories -->
             <div class="container bg-dark bg-opacity-50 py-5">
                 <div class="col-md-10 col-lg-8 mx-auto text-center">
-                    <h2 class="text-white">Associated Categories:</h2>
+                    <h2 class="text-white">
+                        Associated Categories
+                        <i class="fas fa-level-down-alt"></i>
+                    </h2>
                 </div>
             </div>
             <!-- Categories List -->
             <div class="container px-0 px-lg-0 align-items-center">
                 <div class="row mx-0 gx-0 gy-2 py-2 container align-content-around justify-content-around">
                     <% categoryArr.forEach(category => { %>
-                    <div class="col-md-5 mx-1 mb-3 mb-md-0">
-                        <div class="card pt-3 pb-2 h-100">
-                            <div class="card-body text-center">
-                                <h4 class="text-uppercase mt-2 m-0">
-                                    <a href="/categories/<%= category.name %>"><%= category.name %></a>       
-                                </h4>
-                                <hr class="mt-3 mb-0 mx-auto" />
+                        <div class="col-md-5 mx-1 mb-3">
+                            <div class="card pt-3 pb-2 h-100">
+                                <div class="card-body text-center">
+                                    <h4 class="text-uppercase mt-2 m-0">
+                                        <a href="/categories/<%= category.name %>"><%= category.name %></a>       
+                                    </h4>
+                                    <hr class="mt-3 mb-0 mx-auto" />
+                                </div>
                             </div>
                         </div>
-                    </div>
                     <% }) %> 
                 </div>
             </div>
@@ -155,7 +158,10 @@
             <!-- Menu Highlights -->
             <div class="container bg-dark bg-opacity-50 py-5">
                 <div class="col-md-10 col-lg-8 mx-auto text-center">
-                    <h2 class="text-white">Menu Highlights:</h2>
+                    <h2 class="text-white">
+                        Menu Highlights
+                        <i class="fas fa-level-down-alt"></i>
+                    </h2>
                 </div>
             </div>
             <!-- Menu Highlight List -->
@@ -163,7 +169,7 @@
                 <div class="container px-0 px-lg-0 align-items-center">
                     <div class="row mx-0 gx-0 gy-2 py-2 container align-content-around justify-content-around">
                         <% menuArr.forEach(menuItem => { %>
-                        <div class="col-md-5 mx-1 mb-3 mb-md-0">
+                        <div class="col-md-5 mx-1 mb-3">
                             <div class="card pt-3 pb-2 h-100">
                                 <div class="card-body text-center">
                                     
