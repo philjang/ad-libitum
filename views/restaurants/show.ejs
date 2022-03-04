@@ -1,69 +1,211 @@
-<h3><%= selectedRestaurant.name %></h3>
-<h4>Address: <%= selectedRestaurant.address %></h4> 
-<h4>Note: <%= selectedRestaurant.note %></h4> 
-<h4>Rating: <%= selectedRestaurant.rating %></h4> 
-<h4>Associated Categories:</h4>
+<section class="padding-vert contact-section bg-dark">
+<!-- Title -->
+    <div class="container mb-5 bg-dark bg-opacity-50 py-5">
+        <div class="col-md-10 col-lg-8 mx-auto text-center">
+            <h2 class="text-white"><%= selectedRestaurant.name %></h2>
+        </div>
+    </div>
+<!-- Page Content -->
+    <div class="row mx-0 justify-content-around">
+        <!-- Column 1 -->
+        <div class="col-md-6 col-lg-5 justify-content-start">
+            <!-- Restaurant Details -->
+            <div class="container bg-dark bg-opacity-50 py-2">
+                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                    <div class="card py-2 h-50">
+                        <div class="card-body text-center">
+                            <h4 class="text-uppercase m-0">
+                                <i class="fas fa-angle-double-right"></i>
+                                Address: <%= selectedRestaurant.address %>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container bg-dark bg-opacity-50 py-2">
+                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                    <div class="card py-2 h-50">
+                        <div class="card-body text-center">
+                            <h4 class="text-uppercase m-0">
+                                <i class="fas fa-angle-double-right"></i>
+                                Note: <%= selectedRestaurant.note %>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container bg-dark bg-opacity-50 py-2">
+                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                    <div class="card py-2 h-50">
+                        <div class="card-body text-center">
+                            <h4 class="text-uppercase m-0">
+                                <i class="fas fa-angle-double-right"></i>
+                                Rating: <%= selectedRestaurant.rating %>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Edit Restaurant Link -->
+            <div class="container bg-dark bg-opacity-50 mt-3 py-2">
+                <div class="col-md-9 col-lg-7 mx-auto text-center">
+                    <div class="card py-2 h-50">
+                        <div class="card-body text-center">
+                            <h4 class="text-uppercase m-0">
+                                <a href="/restaurants/edit/<%= selectedRestaurant.id %>">
+                                    <i class="fas fa-edit"></i>
+                                        __Edit this Restaurant
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Associated Categories -->
+            <div class="container bg-dark bg-opacity-50 py-5">
+                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                    <h2 class="text-white">Associated Categories:</h2>
+                </div>
+            </div>
+            <!-- Categories List -->
+            <div class="container px-0 px-lg-0 align-items-center">
+                <div class="row mx-0 gx-0 gy-2 py-2 container align-content-around justify-content-around">
+                    <% categoryArr.forEach(category => { %>
+                    <div class="col-md-5 mx-1 mb-3 mb-md-0">
+                        <div class="card pt-3 pb-2 h-100">
+                            <div class="card-body text-center">
+                                <h4 class="text-uppercase mt-2 m-0">
+                                    <a href="/categories/<%= category.name %>"><%= category.name %></a>       
+                                </h4>
+                                <hr class="mt-3 mb-0 mx-auto" />
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %> 
+                </div>
+            </div>
+            <!-- No Category Message -->
+            <% if(!selectedRestaurant.categories[0]) { %> 
+                <div class="container bg-dark bg-opacity-50 py-5">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+                        <div class="card py-4 h-100">
+                            <div class="card-body text-center">
+                                <h4 class="text-uppercase m-0">
+                                    No Associated Categories Yet
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% } %> 
+            <!-- Add Category Link -->
+            <div class="container bg-dark bg-opacity-50 mt-3 py-2">
+                <div class="col-md-9 col-lg-7 mx-auto text-center">
+                    <div class="card py-2 h-50">
+                        <div class="card-body text-center">
+                            <h4 class="text-uppercase m-0">
+                                <a href="/restaurants/<%= selectedRestaurant.id %>/addcategory">
+                                    <i class="fas fa-angle-double-right"></i>
+                                        Add <%= selectedRestaurant.name %> to a Category
+                                    <i class="fas fa-angle-double-left"></i>
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<ul>
-    <% categoryArr.forEach(category => { %>
- <li><a href="/categories/<%= category.name %>"><%= category.name %> </a></li>
-    <% }) %>
-    <% if(!selectedRestaurant.categories[0]) { %> 
-    <li>No Associated Categories Yet</li>
-    <% } %> 
-</ul>
+        <!-- Column 2 -->
+        <div class="col-md-6 col-lg-5">
+            <!-- map -->
+            <% if (selectedRestaurant.coordinates.coordinates[1] === 90) { %>
+                <p><%= selectedRestaurant.coordinates.coordinates %></p>
+            <% } else { %>
+                <div id='map' style='width: 400px; height: 300px;'></div>
+                <script>
+                    mapboxgl.accessToken = '<%= mapkey %>';
+                    const map = new mapboxgl.Map({
+                        container: 'map', // container ID
+                        style: 'mapbox://styles/mapbox/streets-v11', // style URL
+                        center: [<%=selectedRestaurant.coordinates.coordinates%>], // starting position [lng, lat]
+                        zoom: 17 // starting zoom
+                    });
+                    const marker = new mapboxgl.Marker()
+                    .setLngLat([<%=selectedRestaurant.coordinates.coordinates%>])
+                    .addTo(map);
+                </script>
+            <% } %> 
+            <!-- Edit Map -->
+            <div class="container bg-dark bg-opacity-50 mt-3 py-2">
+                <div class="col-md-6 col-lg-5 mx-auto text-center">
+                    <div class="card py-2 h-50">
+                        <div class="card-body text-center">
+                            <h4 class="text-uppercase m-0">
+                                <a href="/restaurants/<%=selectedRestaurant.id%>/map">
+                                    <i class="fas fa-edit"></i>__Wrong Map
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Menu Highlights -->
+            <div class="container bg-dark bg-opacity-50 py-5">
+                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                    <h2 class="text-white">Menu Highlights:</h2>
+                </div>
+            </div>
+            <!-- Menu Highlight List -->
+            <% if (menuArr[0]) { %>
+                <div class="container px-0 px-lg-0 align-items-center">
+                    <div class="row mx-0 gx-0 gy-2 py-2 container align-content-around justify-content-around">
+                        <% menuArr.forEach(menuItem => { %>
+                        <div class="col-md-5 mx-1 mb-3 mb-md-0">
+                            <div class="card pt-3 pb-2 h-100">
+                                <div class="card-body text-center">
+                                    
+                                    <h3 class="text-uppercase mt-2 m-0"><%= menuItem.name %></h3>
+                                    <hr class="mt-3 mb-2 mx-auto" />
+                                    <h6 class="text-lowercase">Description: <%= menuItem.description %></h6>
+                                    <h6 class="text-lowercase">Price: $<%= menuItem.price %></h6>
 
-<div>
-    <a href="/restaurants/<%= selectedRestaurant.id %>/addcategory">Add <%= selectedRestaurant.name %> to a Category</a>
-</div>
-<div>
-    <a href="/restaurants/edit/<%= selectedRestaurant.id %>">Edit this Restaurant</a>
-</div>
-
-
-<!-- map -->
-<% if (selectedRestaurant.coordinates.coordinates[1] === 90) { %>
-    <p><%= selectedRestaurant.coordinates.coordinates %></p>
-<% } else { %>
-    <div id='map' style='width: 400px; height: 300px;'></div>
-    <script>
-        mapboxgl.accessToken = '<%= mapkey %>';
-        const map = new mapboxgl.Map({
-            container: 'map', // container ID
-            style: 'mapbox://styles/mapbox/streets-v11', // style URL
-            center: [<%=selectedRestaurant.coordinates.coordinates%>], // starting position [lng, lat]
-            zoom: 17 // starting zoom
-        });
-        const marker = new mapboxgl.Marker()
-        .setLngLat([<%=selectedRestaurant.coordinates.coordinates%>])
-        .addTo(map);
-    </script>
-<% } %> 
-
-<div>
-    <a href="/restaurants/<%=selectedRestaurant.id%>/map">Wrong Map</a>
-</div>
-
-<% if (menuArr[0]) { %>
-<div class ="menu-container">
-<div class="menu">
-    <ul>
-        <% menuArr.forEach(menuItem => { %>
-    <h4><%= menuItem.name %></h4>
-    <p>Description: <%= menuItem.description %></p>
-    <p>Price: $<%= menuItem.price %></p>
-        <% }) %>
-    </ul>
-</div>
-<% } else { %>
-<div class ="menu-container">
-<div class="no-menu"><p>No Menu Highlights yet!</p></div>
-<% } %>
-
-<div>
-    <a href="/restaurants/<%= selectedRestaurant.id %>/newmenu">Add a New Favorite</a>
-</div>
-<!-- <form action="/restaurants/<%# selectedRestaurant.id %>/?_method=DELETE" method="post">
-    <button type="submit">Delete This Restaurant...</button>
-</form> -->
-</div>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %> 
+                    </div>
+                </div>
+            <% } else { %>
+            <!-- No Menu Highlights Message -->
+                <div class="container bg-dark bg-opacity-50 py-5">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+                        <div class="card py-4 h-100">
+                            <div class="card-body text-center">
+                                <h4 class="text-uppercase m-0">
+                                    No Associated Menu Highlights Yet!
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+            <!-- Add New Menu Link -->
+            <div class="container bg-dark bg-opacity-50 mt-3 py-2">
+                <div class="col-md-9 col-lg-7 mx-auto text-center">
+                    <div class="card py-2 h-50">
+                        <div class="card-body text-center">
+                            <h4 class="text-uppercase m-0">
+                                <a href="/restaurants/<%= selectedRestaurant.id %>/newmenu">
+                                    <i class="fas fa-angle-double-right"></i>
+                                        Add a New Favorite
+                                    <i class="fas fa-angle-double-left"></i>
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
