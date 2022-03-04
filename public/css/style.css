@@ -1,6 +1,9 @@
 body {
     background-color: lightgray;
 }
+em {
+    color:white;
+}
 
 .menu-container{
     display: flex;

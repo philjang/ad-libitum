@@ -1,17 +1,25 @@
-<% if(error) { %> 
-    <em><%= error %> </em>
-    <% } %> 
-
-<form action="/users/login" method="post">
-   <div>
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" required>
-   </div>
-
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password">
+<section class="signup-section" id="signup">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5">
+            <div class="col-md-10 col-lg-8 mx-auto text-center">
+                <h2 class="text-white mb-5">Welcome Back!</h2>
+                <% if(error) { %> 
+                <div class="animate__animated animate__flash"><em ><%= error %> </em></div>
+                <% } %> 
+                <form action="/users/login" method="post">
+                    <div class="col">
+                        <div class="mb-4">
+                            <label class="text-white" for="email">Email:</label>
+                            <input class="form-control" type="email" name="email" id="email" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="text-white" for="password">Password:</label>
+                            <input class="form-control" type="password" name="password" id="password">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Log In</button>
+                </form>
+            </div>
+        </div>
     </div>
-
-    <button type="submit">Log In</button>
-</form>
+</section>
