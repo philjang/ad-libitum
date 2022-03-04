@@ -7,7 +7,7 @@
 // Scripts
 // 
 
-window.addEventListener('DOMContentLoaded', event => {
+// window.addEventListener('load', event => {
 
     // Navbar shrink function
     const navbarShrink = function () {
@@ -51,4 +51,4 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     });
 
-});
+// });

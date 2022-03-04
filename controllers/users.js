@@ -37,7 +37,7 @@ router.post('/', async (req,res) => {
             // res.cookie(name of cookie, value)
             res.cookie('userId', encryptedUserIdString)
             // redirect back to home page
-            res.redirect('/')
+            res.redirect('/users/profile')
         }
     } catch (error) {
         console.log(error)
@@ -46,6 +46,9 @@ router.post('/', async (req,res) => {
 
 // login form
 router.get('/login', (req,res) => {
+    if (res.locals.currentUser) {
+        res.redirect('/users/profile')
+    }
     res.render('users/login.ejs', {error: null})
 })
 
