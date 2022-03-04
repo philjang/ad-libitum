@@ -1,11 +1,41 @@
-<h3>Categories Index</h3>
+<section class="padding-vert contact-section bg-dark">
 
-<ul>
-    <% categoryArr.forEach(category => { %>
- <li><a href="/categories/<%= category.name %>"><%= category.name %> </a></li>
-    <% }) %>
-</ul>
+    <div class="container bg-dark bg-opacity-50 py-5">
+        <div class="col-md-10 col-lg-8 mx-auto text-center">
+            <h2 class="text-white">Your Categories</h2>
+        </div>
+    </div>
 
-<div>
-    <a href="/categories/new">Add New Category</a>
-</div>
+    <div class="container px-4 px-lg-5 align-items-center">
+        <div class="row mx-0 gx-4 gy-5 gx-lg-5 py-4 py-lg-5 container align-content-around justify-content-around">
+            <% categoryArr.forEach(category => { %>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
+                            <h4 class="text-uppercase m-0">
+                                <a href="/categories/<%= category.name %>"><%= category.name %> </a>
+                            </h4>
+                            <hr class="mb-1 mt-4 mx-auto" />
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+
+
+ <div class="container bg-dark bg-opacity-50 py-5">
+        <div class="col-md-10 col-lg-8 mx-auto text-center">
+            <div class="card py-4 h-100">
+                <div class="card-body text-center">
+                    <h4 class="text-uppercase m-0">
+                        <a href="/categories/new">
+                            <i class="fas fa-angle-double-right"></i>___Add New Category___<i class="fas fa-angle-double-left"></i>
+                        </a>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

@@ -1,10 +1,35 @@
-<h3><%= selectedCategory.name %></h3>
-<ul>
-    <% restaurantArr.forEach(restaurant => { %>
- <li><a href="/restaurants/<%= restaurant.id %>"><%= restaurant.name %> </a></li>
-    <% }) %>
-</ul>
+<section class="padding-vert contact-section bg-dark">
 
-<form action="/categories/<%= selectedCategory.name %>/?_method=DELETE" method="post">
-<button type="submit">Delete This Category...</button>
-</form>
+    <div class="container bg-dark bg-opacity-50 py-5">
+        <div class="col-md-10 col-lg-8 mx-auto text-center">
+            <h2 class="text-white"><%= selectedCategory.name %></h2>
+        </div>
+    </div>
+
+    <div class="container px-4 px-lg-5 align-items-center">
+        <div class="row mx-0 gx-4 gy-5 gx-lg-5 py-4 py-lg-5 container align-content-around justify-content-around">
+            <% restaurantArr.forEach(restaurant => { %>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
+                            <h4 class="text-uppercase m-0">
+                                <a href="/restaurants/<%= restaurant.id %>"><%= restaurant.name %> </a>        
+                            </h4>
+                            <hr class="mb-1 mt-4 mx-auto" />
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+
+
+ <div class="container bg-dark bg-opacity-50 py-5">
+        <div class="col-md-10 col-lg-8 mx-auto text-center">
+            <form action="/categories/<%= selectedCategory.name %>/?_method=DELETE" method="post">
+                <button class="btn btn-primary" type="submit">Delete This Category...</button>
+            </form>
+        </div>
+    </div>
+
+</section>

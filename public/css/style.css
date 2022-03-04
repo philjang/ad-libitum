@@ -1,5 +1,5 @@
 body {
-    /* background-color: lightgray; */
+    background-color: lightgray;
 }
 em {
     color:white;
@@ -12,6 +12,14 @@ input {
     display: flex;
     flex-direction: column; 
     align-items: flex-end;
+}
+
+.padding-top {
+    padding-top: 5rem;
+}
+
+.padding-vert {
+    padding: 10rem 0rem;
 }
 
 .backdrop {

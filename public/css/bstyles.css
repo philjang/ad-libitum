@@ -49,8 +49,8 @@
   --bs-info-rgb: 28, 171, 196;
   --bs-warning-rgb: 228, 198, 98;
   --bs-danger-rgb: 161, 100, 104;
-  --bs-light-rgb: 248, 249, 250;
-  --bs-dark-rgb: 33, 37, 41;
+  --bs-light-rgb: 199, 203, 209;
+  --bs-dark-rgb: 48, 56, 65;
   --bs-black-rgb: 0, 0, 0;
   --bs-white-rgb: 255, 255, 255;
   --bs-white-rgb: 255, 255, 255;
@@ -11474,13 +11474,13 @@ body {
 
 #mainNav {
   min-height: 3.5rem;
-  background-color: #fff;
+  background-color: #f1f3f4;
 }
 #mainNav .navbar-toggler {
   font-size: 80%;
   padding: 0.75rem;
-  color: #64a19d;
-  border: 1px solid #64a19d;
+  color: #6483a1;
+  border: 1px solid #6483a1;
 }
 #mainNav .navbar-toggler:focus {
   outline: none;
@@ -11523,7 +11523,7 @@ body {
     color: #fff;
   }
   #mainNav.navbar-shrink {
-    background-color: #fff;
+    background-color: #f1f3f4;
   }
   #mainNav.navbar-shrink .navbar-brand {
     color: #000;
@@ -11620,8 +11620,8 @@ body {
 }
 @media (min-width: 992px) {
   .projects-section .featured-text {
-    padding: 0 0 0 2rem;
-    border-left: 0.5rem solid #64a19d;
+    padding: 0 0 0 0;
+    border-bottom: 0.5rem solid #6483a1;
   }
 }
 .projects-section .project-text {

@@ -1,23 +1,32 @@
-<h2>Hello <%= currentUser.name %> </h2>
+<section class="padding-vert contact-section bg-dark">
 
-<div>
-    <a href="/restaurants/">My Restaurants</a>
-</div>
-<div>
-    <a href="/categories/">My Categories</a>
-</div>
+    <div class="container bg-dark bg-opacity-50 py-5">
+        <div class="col-md-10 col-lg-8 mx-auto text-center">
+            <h2 class="text-white">Hello <%= currentUser.name %> </h2>
+        </div>
+    </div>
 
-<section class="projects-section bg-light" id="projects">
-    <div class="container px-4 px-lg-5">
-        <!-- Featured Project Row-->
-        <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
-            <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="/assets/img/bg-masthead.jpg" alt="..." /></div>
-            <div class="col-xl-4 col-lg-5">
-                <div class="featured-text text-center text-lg-left">
-                    <h4>Shoreline</h4>
-                    <p class="text-black-50 mb-0">Grayscale is open source and MIT licensed. This means you can use it for any project - even commercial projects! Download it, customize it, and publish your website!</p>
+    <div class="container px-4 px-lg-5 align-items-center">
+        <div class="row mx-0 gx-4 gx-lg-5 py-4 py-lg-5 container justify-content-around">
+            <div class="col-md-4 mb-3 mb-md-0">
+                <div class="card py-4 h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-utensils text-primary my-3"></i>
+                        <h4 class="text-uppercase m-0"><a href="/restaurants/">My Restaurants</a></h4>
+                        <hr class="my-4 mx-auto" />
+                    </div>
                 </div>
             </div>
+            <div class="col-md-4 mb-3 mb-md-0">
+                <div class="card py-4 h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-folder-open text-primary my-3"></i>
+                        <h4 class="text-uppercase m-0"><a href="/categories/">My Categories</a></h4>
+                        <hr class="my-4 mx-auto" />
+                    </div>
+                </div>
+            </div>
+     
         </div>
     </div>
 </section>
