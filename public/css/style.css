@@ -1,5 +1,5 @@
 body {
-    background-color: lightgray;
+    /* background-color: lightgray; */
 }
 em {
     color:white;
@@ -8,11 +8,37 @@ input {
     text-align: center;
 }
 
-.menu-container{
+.menu-container {
     display: flex;
     flex-direction: column; 
     align-items: flex-end;
 }
+
+.backdrop {
+    background-color:rgba(255, 255, 255, 0.3)
+}
+
+.black {
+    padding-top: 10rem;
+    background-color: black;
+}
+@media (min-width: 992px) {
+    .black {
+        padding-top: 15rem;
+    }
+}
+
+@media (min-width: 992px) {
+    #title {
+    padding-right: 20vw;
+    }
+}
+
+#below-login {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.2) 90%, rgba(0, 0, 0, 1) 100%), url('../assets/img/signup.jpg');
+    background-size: cover;
+}
+
 .menu {
     /* background-color: lightgray; */
 }

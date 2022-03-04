@@ -1,22 +1,29 @@
 <section class="signup-section" id="signup">
-    <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5">
+    <div class="backdrop container px-4 px-lg-5">
+        <div class="row py-4 gx-4 gx-lg-5">
             <div class="col-md-10 col-lg-8 mx-auto text-center">
-                <h2 class="text-white mb-5">Welcome Back!</h2>
+
+                <i class="fas fa-file-signature fa-2x mb-3 text-white"></i>
+                <h2 class="text-white mb-5">Welcome Back! Let's Get You Signed In!</h2>
+
                 <% if(error) { %> 
                 <div class="animate__animated animate__flash"><em ><%= error %> </em></div>
                 <% } %> 
+
                 <form action="/users/login" method="post">
                     <div class="mb-4">
                         <label class="text-white" for="email">Email:</label>
-                        <input class="form-control" type="email" name="email" id="email" required>
+                        <input class="form-control" autocomplete="off" type="email" name="email" id="email" required>
                     </div>
-                    <div class="mb-4">
+
+                    <div class="mb-5">
                         <label class="text-white" for="password">Password:</label>
                         <input class="form-control" type="password" name="password" id="password">
                     </div>
+                    
                     <button class="btn btn-primary" type="submit">Log In</button>
                 </form>
+
             </div>
         </div>
     </div>
