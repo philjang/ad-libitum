@@ -38,7 +38,7 @@ router.post('/', async (req, res) => {
 });
    
 // new category form
-router.get('/new', (req, res) => {
+router.get('/1new', (req, res) => {
     if (res.locals.currentUser) {
         res.render('categories/new.ejs', {error: null});
     } else res.redirect('/')

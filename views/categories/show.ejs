@@ -1,6 +1,6 @@
-<section class="padding-vert contact-section bg-dark">
+<section class="padding-top contact-section bg-dark">
 
-    <div class="container bg-dark bg-opacity-50 py-5">
+    <div class="container bg-dark bg-opacity-50 py-3">
         <div class="col-md-10 col-lg-8 mx-auto text-center">
             <h2 class="text-white"><%= selectedCategory.name %></h2>
         </div>
@@ -27,7 +27,7 @@
     <div class="container bg-dark bg-opacity-50 py-5">
         <div class="col-md-10 col-lg-8 mx-auto text-center">
             <form action="/categories/<%= selectedCategory.name %>/?_method=DELETE" method="post">
-                <button class="btn btn-primary" type="submit">Delete This Category...</button>
+                <button class="btn btn-primary" type="submit"><i class="fas fa-trash-alt"></i>  &nbsp; Delete This Category...</button>
             </form>
         </div>
     </div>
