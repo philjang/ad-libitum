@@ -137,7 +137,7 @@ router.put('/:id/map', async (req,res) => {
 })
 
 // add new menu item
-router.post('/:id/', async (req,res) => {
+router.post('/:id', async (req,res) => {
     if (res.locals.currentUser) {
         try {
             const [newMenu, wasCreated] = await db.menu.findOrCreate({
@@ -150,8 +150,20 @@ router.post('/:id/', async (req,res) => {
                     price: req.body.price
                 }
             })
-            console.log(`User ${res.locals.currentUser.name} created a new menu item, ${newMenu}:(${wasCreated}), for the restaurant with id #${req.params.id}`)
-            res.redirect(`/restaurants/${req.params.id}`.brightCyan)
+            // repeat as get route for error message
+            const selectedRestaurant = await db.restaurant.findOne({
+                where: {
+                    id: req.params.id,
+                    userId: res.locals.currentUser.id,
+                },
+                include: [db.menu,db.category]
+            })
+            const menuItems = selectedRestaurant.menus
+            const associatedCategories = selectedRestaurant.categories
+            console.log(`User ${res.locals.currentUser.name} created a new menu item, ${newMenu}:(${wasCreated}), for the restaurant with id #${req.params.id}`.brightCyan)
+            if (!wasCreated) {
+                res.render(`restaurants/show.ejs`, {error: `The same item is already in your list!`, menuArr: menuItems, categoryArr: associatedCategories,selectedRestaurant,mapkey: process.env.MAPBOX_API_TOKEN})
+            } else res.redirect(`/restaurants/${req.params.id}`)
         } catch (error) {
             console.log(error)
         }
@@ -178,7 +190,7 @@ router.get('/:id', async (req,res)=>{
             })
             const menuItems = selectedRestaurant.menus
             const associatedCategories = selectedRestaurant.categories
-            res.render('restaurants/show.ejs', {menuArr: menuItems, categoryArr: associatedCategories,selectedRestaurant,mapkey: process.env.MAPBOX_API_TOKEN})
+            res.render('restaurants/show.ejs', {error: null, menuArr: menuItems, categoryArr: associatedCategories,selectedRestaurant,mapkey: process.env.MAPBOX_API_TOKEN})
         } catch (error) {
             console.log(error)
         }

@@ -1,8 +1,11 @@
-<section class="padding-vert contact-section bg-dark">
+<section class="py-5 contact-section bg-dark">
 <!-- Title -->
-    <div class="container mb-5 bg-dark bg-opacity-50 py-5">
-        <div class="col-md-10 col-lg-8 mx-auto text-center">
+    <div class="container mb-1 bg-dark bg-opacity-50 py-5">
+        <div class="column col-md-10 col-lg-8 mx-auto text-center">
             <h2 class="text-white"><%= selectedRestaurant.name %></h2>
+            <% if(error) { %> 
+                <div class="animate__animated animate__flash"><em ><%= error %> </em></div>
+            <% } %> 
         </div>
     </div>
 <!-- Page Content -->

@@ -7,7 +7,7 @@ require('dotenv').config()
 
 // new user form
 router.get('/new', (req,res)=>{
-    res.render('users/new.ejs')
+    res.render('users/new.ejs', {error: null})
 })
 
 // add new user
@@ -19,8 +19,8 @@ router.post('/', async (req,res) => {
             }
         })
         if(!created) {
-            console.log('User already exists')
-            // render the login page and send an appropriate message
+            console.log('User already exists'.brightCyan)
+            res.render('users/new.ejs', {error: 'Email already taken'})
         } else {
             // hasSync(password, salt rounds)
             const hashedPassword = bcrypt.hashSync(req.body.password, 10)

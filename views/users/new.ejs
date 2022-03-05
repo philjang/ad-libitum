@@ -6,6 +6,10 @@
                 <i class="fas fa-file-signature fa-2x mb-3 text-white"></i>
                 <h2 class="text-white mb-5">Hi There! Sign up Below!</h2>
 
+                <% if(error) { %> 
+                    <div class="animate__animated animate__flash"><em ><%= error %> </em></div>
+                <% } %> 
+
                 <form action="/users" method="post">
                     <div class="mb-4">
                         <label class="text-white" for="name">Name:</label>
