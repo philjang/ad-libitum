@@ -1,40 +1,34 @@
-<h3>Pick from Below</h3>
+<section class="padding-top py-5 contact-section bg-dark">
+    <!-- Title -->
+    <div class="container bg-dark bg-opacity-50 py-5">
+        <div class="col-md-10 col-lg-8 mx-auto text-center">
+            <h2 class="text-white"><i class="fas fa-street-view text-primary"></i> &nbsp;Pick from Below</h2>
+        </div>
+    </div>
+    <!-- Results List -->
+    <div class="container px-4 px-lg-5 align-items-center">
+        <div class="row gy-5 gx-4 gx-lg-5">
+            <% resultsArr.forEach(feature => { %>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
 
-<ul>
-    <% resultsArr.forEach(feature => { %>
-        <li>
-            <div><%= feature.place_name %> </div>
-            <div>category: <%= feature.properties.category %> </div>
-            <div>foursquare: <a target="_blank" href="https://foursquare.com/v/<%= feature.properties.foursquare %>">link</a></div>
+                            <h5 class="text-capitalize my-2 m-0"><%= feature.place_name %> </h5>
+                            <h6 class="text-lowercase">Mapbox category: <%= feature.properties.category %> </h6>
+                            <h6 class="text-lowercase">Foursquare: <a target="_blank" href="https://foursquare.com/v/<%= feature.properties.foursquare %>">link</a></h6>
 
-            <form action="/restaurants/<%=restaurantId%>/map/?_method=put" method="post">
-                <input type="hidden" name="lon" value="<%=feature.center[0]%>">
-                <input type="hidden" name="lat" value="<%=feature.center[1]%>">
-                <button type="submit">Update Map With This Entry</button>    
-            </form>
-        </li>
-    <% }) %>
-</ul>
-        
+                            <hr class="my-4 mx-auto" />
 
-<section class="padding-top contact-section bg-dark">
-    <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5">
+                            <form action="/restaurants/<%=restaurantId%>/map/?_method=put" method="post">
+                                <input type="hidden" name="lon" value="<%=feature.center[0]%>">
+                                <input type="hidden" name="lat" value="<%=feature.center[1]%>">
+                                <button class="btn btn-primary" type="submit"><i class="fas fa-map-marker-alt"></i> &nbsp; That's Better</button>    
+                            </form>
 
-            <div class="col-md-4 mb-3 mb-md-0">
-                <div class="card py-4 h-100">
-                    <div class="card-body text-center">
-
-                        <h4 class="text-uppercase m-0">  Name   </h4>
-
-                        <hr class="my-4 mx-auto" />
-
-                        form button
-
+                        </div>
                     </div>
                 </div>
-            </div>
-
+            <% }) %>
         </div>
     </div>
 </section>
