@@ -3,6 +3,9 @@
     <div class="container bg-dark bg-opacity-50 py-3">
         <div class="col-md-10 col-lg-8 mx-auto text-center">
             <h2 class="text-white">Pick from Below or Add a <a href='#new-bottom'>New Category</a></h2>
+            <% if(error) { %> 
+                <div class="animate__animated animate__flash"><em ><%= error %> </em></div>
+            <% } %> 
         </div>
     </div>
 </section>

@@ -213,7 +213,7 @@ router.get('/:id/addcategory', async (req,res)=>{
                 include: [db.restaurant]
             })
             // let ejsOption = {async: true}
-            res.render('restaurants/addcategory.ejs', {selectedRestaurant, categoryArr: categories})
+            res.render('restaurants/addcategory.ejs', {error: null, selectedRestaurant, categoryArr: categories})
         } catch (error) {
             console.log(error)
         }
@@ -233,18 +233,27 @@ router.post('/:id/addcategory', async (req,res)=>{
             const foundRestaurant = await db.restaurant.findOne({
                 where: {id: req.params.id}
             })
-            await newCategory.addRestaurant(foundRestaurant)
-            // const resCat = await foundRestaurant.getCategories()
-            console.log(`User ${res.locals.currentUser.name} created a new category, ${newCategory.name}: ${wasCreated} and linked to ${foundRestaurant.name}`.brightCyan);
-            // console.log(foundRestaurant,resCat)
-            res.redirect(`/restaurants/${req.params.id}/addcategory`);
+            if (!wasCreated) {
+                // repeat as get route for error message
+                const categories = await db.category.findAll({
+                    where: {userId: res.locals.currentUser.id},
+                    include: [db.restaurant]
+                })
+                res.render('restaurants/addcategory.ejs', {error: 'That category already exists', selectedRestaurant: foundRestaurant, categoryArr: categories})
+            } else {
+                await newCategory.addRestaurant(foundRestaurant)
+                // const resCat = await foundRestaurant.getCategories()
+                console.log(`User ${res.locals.currentUser.name} created a new category, ${newCategory.name}: ${wasCreated} and linked to ${foundRestaurant.name}`.brightCyan);
+                // console.log(foundRestaurant,resCat)
+                res.redirect(`/categories/${newCategory.name}`);
+            }
         } catch (error) {
             console.log(error);
         }
     } else res.redirect('/')
 })
 
-// unassociated restaurant from existing category route
+// unassociate restaurant from existing category route
 router.post('/:id/rmfrom/:categoryId', async (req,res) => {
     if (res.locals.currentUser) {
         try {
