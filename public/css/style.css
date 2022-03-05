@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap');
+
 body {
     background-color: lightgray;
 }
@@ -72,4 +74,9 @@ input {
         width: 32vw; 
         height: 24vw;
     }
+}
+
+#pang {
+    font-family: 'Comforter Brush', cursive;
+    letter-spacing: .15rem;
 }

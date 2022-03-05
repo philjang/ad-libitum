@@ -122,7 +122,7 @@ router.get('/mapresults', async (req,res) => {
     } else res.redirect('/')
 })
 
-// update coordinates
+// update coordinates PUT
 router.put('/:id/map', async (req,res) => {
     if (res.locals.currentUser) {
         try {
