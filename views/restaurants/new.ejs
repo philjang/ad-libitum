@@ -3,8 +3,11 @@
             
             <!-- Title -->
             <div class="container py-5">
-                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                <div class="column col-md-10 col-lg-8 mx-auto text-center">
                     <h2 class="text-white">New Restaurant</h2>
+                    <% if(error) { %> 
+                        <div class="animate__animated animate__flash"><em ><%= error %> </em></div>
+                    <% } %> 
                 </div>
             </div>
 

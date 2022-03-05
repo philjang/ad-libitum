@@ -11,7 +11,7 @@ router.get('/', async (req,res)=>{
             const restaurants = await db.restaurant.findAll({
                 where: {userId: res.locals.currentUser.id}
             })
-            res.render('restaurants/index.ejs', {restaurantArr: restaurants})
+            res.render('restaurants/index.ejs', {restaurantArr: restaurants, error: null})
         } catch (error) {
             console.log(error)
         }
@@ -35,13 +35,17 @@ router.post('/', async (req,res) => {
                 }
             })
             console.log(`User ${res.locals.currentUser.name} created a new restaurant, ${newRestaurant.name}: ${wasCreated}`.brightCyan)
-            const retrievedJSON = await axios.get("https://api.mapbox.com/geocoding/v5/mapbox.places/"+newRestaurant.name+" "+newRestaurant.address+".json?types=address%2Cpoi&access_token="+process.env.MAPBOX_API_TOKEN)
-            // console.log(retrievedJSON.data.features[0].center)
-            const point = await {type: 'Point', coordinates: retrievedJSON.data.features[0].center}
-            newRestaurant.coordinates = point
-            await newRestaurant.save()
-            // console.log(newRestaurant.coordinates)
-            res.redirect('/restaurants')
+            if (!wasCreated) {
+                res.render('restaurants/new.ejs', {error: 'That restaurant is already in your list!'})
+            } else {
+                const retrievedJSON = await axios.get("https://api.mapbox.com/geocoding/v5/mapbox.places/"+newRestaurant.name+" "+newRestaurant.address+".json?types=address%2Cpoi&access_token="+process.env.MAPBOX_API_TOKEN)
+                // console.log(retrievedJSON.data.features[0].center)
+                const point = await {type: 'Point', coordinates: retrievedJSON.data.features[0].center}
+                newRestaurant.coordinates = point
+                await newRestaurant.save()
+                // console.log(newRestaurant.coordinates)
+                res.redirect('/restaurants')
+            }
         } catch (error) {
             console.log(error)
         }
@@ -51,7 +55,7 @@ router.post('/', async (req,res) => {
 // new restaurant form
 router.get('/new', (req,res)=>{
     if (res.locals.currentUser) {
-        res.render('restaurants/new.ejs')
+        res.render('restaurants/new.ejs', {error: null})
     } else res.redirect('/')
 })
 
@@ -150,6 +154,7 @@ router.post('/:id', async (req,res) => {
                     price: req.body.price
                 }
             })
+            console.log(`User ${res.locals.currentUser.name} created a new menu item, ${newMenu}:(${wasCreated}), for the restaurant with id #${req.params.id}`.brightCyan)
             // repeat as get route for error message
             const selectedRestaurant = await db.restaurant.findOne({
                 where: {
@@ -160,7 +165,6 @@ router.post('/:id', async (req,res) => {
             })
             const menuItems = selectedRestaurant.menus
             const associatedCategories = selectedRestaurant.categories
-            console.log(`User ${res.locals.currentUser.name} created a new menu item, ${newMenu}:(${wasCreated}), for the restaurant with id #${req.params.id}`.brightCyan)
             if (!wasCreated) {
                 res.render(`restaurants/show.ejs`, {error: `The same item is already in your list!`, menuArr: menuItems, categoryArr: associatedCategories,selectedRestaurant,mapkey: process.env.MAPBOX_API_TOKEN})
             } else res.redirect(`/restaurants/${req.params.id}`)

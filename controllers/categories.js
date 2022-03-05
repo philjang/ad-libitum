@@ -28,17 +28,19 @@ router.post('/', async (req, res) => {
                 },
             });
             console.log(`User ${res.locals.currentUser.name} created a new category, ${newCategory.name}: ${wasCreated}`.brightCyan);
-            res.redirect('/categories');
+            if (!wasCreated) {
+                res.render('categories/new.ejs', {error: 'That category already exists'})
+            } else res.redirect('/categories');
         } catch (error) {
             console.log(error);
         }
     } else res.redirect('/')
 });
    
-// new restaurant form
+// new category form
 router.get('/new', (req, res) => {
     if (res.locals.currentUser) {
-        res.render('categories/new.ejs');
+        res.render('categories/new.ejs', {error: null});
     } else res.redirect('/')
 });
 
