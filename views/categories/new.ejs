@@ -1,9 +1,32 @@
-<h3>New Category</h3>
-<form action="/categories" method="post">
-    <div>
-        <label for="name">Name:</label>
-        <input type="name" name="name" id="name" required>
-    </div>
+<section class="contact-section bg-dark"></section>
+        <div class="bg-dark pb-5">
+            
+            <!-- Title -->
+            <div class="container py-5">
+                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                    <h2 class="text-white">New Category</h2>
+                </div>
+            </div>
 
-    <button type="submit">Add New Category!</button>
-</form>
+            <!-- Form -->
+            <div class="container backdrop-lt px-4 px-lg-5">
+                <div class="row py-4 gx-4 gx-lg-5">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+
+                        <i class="fas fa-file-signature fa-2x mb-3 text-white"></i>
+
+                        <form action="/categories" method="post">
+                            <div class="mb-4">
+                                <label class="text-white" for="name">Name:</label>
+                                <input class="form-control" autocomplete="off" type="name" name="name" id="name" required>
+                            </div>
+                        
+                            <button class="btn btn-primary" type="submit"><i class="fas fa-plus"></i> &nbsp; Add New Category!</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</section>
