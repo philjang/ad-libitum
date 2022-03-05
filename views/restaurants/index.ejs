@@ -10,14 +10,14 @@
         <div class="row mx-0 gx-4 gy-5 gx-lg-5 py-4 py-lg-5 container align-content-around justify-content-around">
             <% restaurantArr.forEach(restaurant => { %>
                 <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="card py-4 h-100">
-                        <div class="card-body text-center">
-                            <h4 class="text-uppercase m-0">
-                                <a href="/restaurants/<%= restaurant.id %>"><%= restaurant.name %></a>
-                            </h4>
-                            <hr class="mb-1 mt-4 mx-auto" />
+                    <a href="/restaurants/<%= restaurant.id %>">
+                        <div class="card py-4 h-100">
+                            <div class="card-body text-center">
+                                <h4 class="text-uppercase m-0"><%= restaurant.name %></h4>
+                                <hr class="mb-1 mt-4 mx-auto" />
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             <% }) %>
         </div>

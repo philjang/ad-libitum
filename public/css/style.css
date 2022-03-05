@@ -48,6 +48,16 @@ input {
     }
 }
 
+@media (max-width: 768px) {
+    .lg-only {
+        display: none;
+    }
+}
+
+.button-link {
+    padding: 1rem 2rem;
+}
+
 #below-login {
     background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.2) 90%, rgba(0, 0, 0, 1) 100%), url('../assets/img/signup.jpg');
     background-size: cover;

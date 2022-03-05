@@ -2,7 +2,7 @@
     <!-- Title -->
     <div class="container mb-1 bg-dark bg-opacity-50 py-5">
         <div class="col-md-10 col-lg-8 mx-auto text-center">
-            <h2 class="text-white"><i class="fas fa-utensils text-primary"></i> &nbsp;Editing <%= selectedRestaurant.name %></h2>
+            <h2 class="text-white"><i class="fas fa-tools text-primary"></i> &nbsp;Editing <%= selectedRestaurant.name %></h2>
         </div>
     </div>
     
@@ -10,53 +10,9 @@
     <div class="row mx-0 justify-content-center">
         <!-- Column 1 -->
         <div class="col-md-6 col-lg-5 justify-content-start">
-            <!-- Current Values -->
-            <div class="container bg-dark bg-opacity-50 py-2">
-                <div class="col-md-10 col-lg-8 mx-auto text-center">
-                    <h2 class="text-white">
-                        Current Values
-                        <i class="fas fa-level-down-alt"></i>
-                    </h2>
-                </div>
-            </div>
-            <div class="container bg-dark bg-opacity-50 py-2">
-                <div class="col-md-10 col-lg-8 mx-auto text-center">
-                    <div class="card py-2 h-50">
-                        <div class="card-body text-center">
-                            <h4 class="text-uppercase m-0">
-                                <i class="fas fa-angle-double-right"></i>
-                                Address: <%= selectedRestaurant.address %>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container bg-dark bg-opacity-50 py-2">
-                <div class="col-md-10 col-lg-8 mx-auto text-center">
-                    <div class="card py-2 h-50">
-                        <div class="card-body text-center">
-                            <h4 class="text-uppercase m-0">
-                                <i class="fas fa-angle-double-right"></i>
-                                Note: <%= selectedRestaurant.note %>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container bg-dark bg-opacity-50 py-2">
-                <div class="col-md-10 col-lg-8 mx-auto text-center">
-                    <div class="card py-2 h-50">
-                        <div class="card-body text-center">
-                            <h4 class="text-uppercase m-0">
-                                <i class="fas fa-angle-double-right"></i>
-                                Rating: <%= selectedRestaurant.rating %>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <!-- Edit Details -->
-            <div class="container bg-dark bg-opacity-50 py-5">
+            <div class="container bg-dark bg-opacity-50 py-2">
                 <div class="col-md-10 col-lg-8 mx-auto text-center">
                     <h2 class="text-white">
                         New Values
@@ -92,6 +48,52 @@
                         
                             <button class="btn btn-primary" type="submit"><i class="fas fa-paper-plane"></i> &nbsp; Submit Edits</button>
                         </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Values -->
+            <div class="container bg-dark bg-opacity-50 pt-5 pb-2">
+                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                    <h2 class="text-white">
+                        Current Values
+                        <i class="fas fa-level-down-alt"></i>
+                    </h2>
+                </div>
+            </div>
+            <div class="container bg-dark bg-opacity-50 py-2">
+                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                    <div class="card py-2 h-50">
+                        <div class="card-body text-center">
+                            <h4 class="text-uppercase m-0">
+                                <i class="fas fa-angle-double-right"></i>
+                                Address: <%= selectedRestaurant.address %>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container bg-dark bg-opacity-50 py-2">
+                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                    <div class="card py-2 h-50">
+                        <div class="card-body text-center">
+                            <h4 class="text-lowercase m-0">
+                                <i class="fas fa-angle-double-right"></i>
+                                Note: <%= selectedRestaurant.note %>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container bg-dark bg-opacity-50 py-2">
+                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                    <div class="card py-2 h-50">
+                        <div class="card-body text-center">
+                            <h4 class="text-uppercase m-0">
+                                <i class="fas fa-angle-double-right"></i>
+                                Rating: <%= selectedRestaurant.rating %>
+                            </h4>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -145,7 +147,8 @@
                         <div class="card py-4 h-100">
                             <div class="card-body text-center">
                                 <h4 class="text-uppercase m-0">
-                                    No Associated Menu Highlights Yet!
+                                    <i class="fas fa-exclamation-circle"></i> &nbsp;
+                                    No Menu Highlights To Display
                                 </h4>
                             </div>
                         </div>
