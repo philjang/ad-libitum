@@ -175,9 +175,17 @@ router.post('/:id', async (req,res) => {
 })
 
 // new menu item form
-router.get('/:id/newmenu', (req,res) => {
+router.get('/:id/newmenu', async (req,res) => {
     if (res.locals.currentUser) {
-        res.render('restaurants/newmenu.ejs', {restaurantId: req.params.id})
+        try {
+            const foundRestaurant = await db.restaurant.findOne({
+                where: {id: req.params.id}
+            })
+            const restaurantName = foundRestaurant.name
+            res.render('restaurants/newmenu.ejs', {restaurantId: req.params.id, restaurantName})
+        } catch (error) {
+            console.log(error)
+        }
     } else res.redirect('/')
 })
 

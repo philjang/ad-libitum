@@ -2,7 +2,7 @@
     <!-- Title -->
     <div class="container mb-1 bg-dark bg-opacity-50 py-5">
         <div class="col-md-10 col-lg-8 mx-auto text-center">
-            <h2 class="text-white">Editing <%= selectedRestaurant.name %></h2>
+            <h2 class="text-white"><i class="fas fa-utensils text-primary"></i> &nbsp;Editing <%= selectedRestaurant.name %></h2>
         </div>
     </div>
     
@@ -90,7 +90,7 @@
                                 <input class="form-control" type="number" name="rating" id="rating" value="<%= selectedRestaurant.rating %>" required>
                             </div>
                         
-                            <button class="btn btn-primary" type="submit">Submit Edits</button>
+                            <button class="btn btn-primary" type="submit"><i class="fas fa-paper-plane"></i> &nbsp; Submit Edits</button>
                         </form>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
                             <h4 class="text-uppercase m-0">
                                 <a href="/restaurants/<%= selectedRestaurant.id %>">
                                     <i class="fas fa-check"></i> 
-                                    __Done Editing
+                                    __Back to Details
                                 </a>
                             </h4>
                         </div>
