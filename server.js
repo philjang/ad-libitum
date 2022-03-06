@@ -35,7 +35,9 @@ app.use('/restaurants', require('./controllers/restaurants.js'))
 app.use('/categories', require('./controllers/categories.js'))
 
 app.get('/', (req,res)=> {
-    res.render('home.ejs')
+    if(res.locals.currentUser) {
+        res.redirect('/users/profile')
+    } else res.render('home.ejs')
 })
 
 app.get('*', (req,res)=> {
