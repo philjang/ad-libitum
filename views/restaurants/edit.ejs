@@ -28,17 +28,17 @@
                         <form action="/restaurants/<%=selectedRestaurant.id %>/?_method=put" method="post">
                             <div class="mb-4">
                                 <label class="text-white" for="name">Name:</label>
-                                <input class="form-control" type="name" name="name" id="name" value="<%= selectedRestaurant.name %>" required>
+                                <input class="form-control" autocomplete="off" type="name" name="name" id="name" value="<%= selectedRestaurant.name %>" required>
                             </div>
                         
                             <div class="mb-4">
                                 <label class="text-white" for="address">Address:</label>
-                                <input class="form-control" type="text" name="address" id="address" value="<%= selectedRestaurant.address %>">
+                                <input class="form-control" autocomplete="off" type="text" name="address" id="address" value="<%= selectedRestaurant.address %>">
                             </div>
                         
                             <div class="mb-4">
                                 <label class="text-white" for="note">Note:</label>
-                                <textarea class="form-control" type="text area" name="note" id="note"><%= selectedRestaurant.note %></textarea>
+                                <textarea class="form-control" autocomplete="off" type="text area" name="note" id="note"><%= selectedRestaurant.note %></textarea>
                             </div>
                         
                             <div class="mb-4">

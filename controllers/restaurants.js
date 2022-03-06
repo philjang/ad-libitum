@@ -31,7 +31,7 @@ router.post('/', async (req,res) => {
                     address: req.body.address,
                     note: req.body.note,
                     rating: req.body.rating,
-                    coordinates: {type: 'Point', coordinates: [135,90]}
+                    coordinates: {type: 'Point', coordinates: [135.000000,90.000000]}
                 }
             })
             console.log(`User ${res.locals.currentUser.name} created a new restaurant, ${newRestaurant.name}: ${wasCreated}`.brightCyan)
