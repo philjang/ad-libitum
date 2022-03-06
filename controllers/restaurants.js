@@ -129,7 +129,7 @@ router.put('/:id/map', async (req,res) => {
         try {
             // const point = {type: 'Point', coordinates: [req.body.lon, req.body.lat]}
             await db.restaurant.update({
-                coordinates: {type: 'Point', coordinates: [req.body.lon, req.body.lat]}
+                coordinates: {type: 'Point', coordinates: [req.body.lon, req.body.lat], crs: { type: 'name', properties: { name: 'EPSG:4326'} } }
             }, {
                 where: {id: req.params.id}
             })
