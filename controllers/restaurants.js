@@ -22,7 +22,7 @@ router.get('/', async (req,res)=>{
 router.post('/', async (req,res) => {
     if (res.locals.currentUser) {
         try {
-            let point = {type: 'Point', coordinates: [135.000000,90.000000],crs: { type: 'name', properties: { name: 'EPSG:4326'} } }
+            const defaultPoint = {type: 'Point', coordinates: [135.000000,90.000000], crs: { type: 'name', properties: { name: 'EPSG:4326'} } }
             const [newRestaurant, wasCreated] = await db.restaurant.findOrCreate({
                 where: {
                     name: req.body.name,
@@ -32,7 +32,7 @@ router.post('/', async (req,res) => {
                     address: req.body.address,
                     note: req.body.note,
                     rating: req.body.rating,
-                    coordinates: point
+                    coordinates: defaultPoint
                 }
             })
             console.log(`User ${res.locals.currentUser.name} created a new restaurant, ${newRestaurant.name}: ${wasCreated}`.brightCyan)
@@ -41,7 +41,7 @@ router.post('/', async (req,res) => {
             } else {
                 const retrievedJSON = await axios.get("https://api.mapbox.com/geocoding/v5/mapbox.places/"+newRestaurant.name+" "+newRestaurant.address+".json?types=address%2Cpoi&access_token="+process.env.MAPBOX_API_TOKEN)
                 // console.log(retrievedJSON.data.features[0].center)
-                point = await {type: 'Point', coordinates: retrievedJSON.data.features[0].center, crs: { type: 'name', properties: { name: 'EPSG:4326'} } }
+                const point = await {type: 'Point', coordinates: retrievedJSON.data.features[0].center, crs: { type: 'name', properties: { name: 'EPSG:4326'} } }
                 newRestaurant.coordinates = point
                 await newRestaurant.save()
                 // console.log(newRestaurant.coordinates)
