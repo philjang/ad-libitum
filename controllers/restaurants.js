@@ -45,7 +45,7 @@ router.post('/', async (req,res) => {
                 newRestaurant.coordinates = point
                 await newRestaurant.save()
                 // console.log(newRestaurant.coordinates)
-                res.redirect('/restaurants')
+                res.redirect(`/restaurants/${newRestaurant.id}`)
             }
         } catch (error) {
             console.log(error)
@@ -104,7 +104,7 @@ router.get('/:id/map', async (req,res) => {
         const foundRestaurant = await db.restaurant.findOne({
             where: {id: req.params.id}
         })
-        res.render('restaurants/map.ejs', {restaurantId: foundRestaurant.id, restaurantName: foundRestaurant.name})
+        res.render('restaurants/map.ejs', {restaurantId: foundRestaurant.id, restaurantName: foundRestaurant.name, restaurantAddress: foundRestaurant.address})
     } else res.redirect('/')
 })
 
