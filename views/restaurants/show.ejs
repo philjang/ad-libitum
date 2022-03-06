@@ -126,25 +126,25 @@
         <!-- Column 2 -->
         <div class="col-md-6 col-lg-5">
             <!-- map -->
-            <% if (selectedRestaurant.coordinates.coordinates[1] === 90) { %>
-                <p>North Pole</p>
-            <% } else { %>
-                <div class="row justify-content-center pt-3">
-                    <div id='map'></div>
-                </div>
-                <script>
-                    mapboxgl.accessToken = '<%= mapkey %>';
-                    const map = new mapboxgl.Map({
-                        container: 'map', // container ID
-                        style: 'mapbox://styles/mapbox/streets-v11', // style URL
-                        center: [<%=selectedRestaurant.coordinates.coordinates%>], // starting position [lng, lat]
-                        zoom: 17 // starting zoom
-                    });
-                    const marker = new mapboxgl.Marker()
-                    .setLngLat([<%=selectedRestaurant.coordinates.coordinates%>])
-                    .addTo(map);
-                </script>
-            <% } %> 
+            <div class="row justify-content-center pt-3">
+                <% if (selectedRestaurant.coordinates.coordinates[1] === 85) { %>
+                    <p class="text-white text-center">No Map Available</p>
+                <% } %>
+                <div id='map'></div>
+            </div>
+            <script>
+                mapboxgl.accessToken = '<%= mapkey %>';
+                const map = new mapboxgl.Map({
+                    container: 'map', // container ID
+                    style: 'mapbox://styles/mapbox/streets-v11', // style URL
+                    center: [<%=selectedRestaurant.coordinates.coordinates%>], // starting position [lng, lat]
+                    zoom: 17 // starting zoom
+                });
+                const marker = new mapboxgl.Marker()
+                .setLngLat([<%=selectedRestaurant.coordinates.coordinates%>])
+                .addTo(map);
+            </script>
+
             <!-- Edit Map -->
             <div class="container bg-dark bg-opacity-50 mt-3 py-2">
                 <div class="col-md-6 col-lg-5 mx-auto text-center">

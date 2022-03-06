@@ -22,7 +22,7 @@ router.get('/', async (req,res)=>{
 router.post('/', async (req,res) => {
     if (res.locals.currentUser) {
         try {
-            const defaultPoint = {type: 'Point', coordinates: [135.000000,90.000000], crs: { type: 'name', properties: { name: 'EPSG:4326'} } }
+            const defaultPoint = {type: 'Point', coordinates: [135, 85], crs: { type: 'name', properties: { name: 'EPSG:4326'} } }
             const [newRestaurant, wasCreated] = await db.restaurant.findOrCreate({
                 where: {
                     name: req.body.name,
