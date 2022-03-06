@@ -130,3 +130,7 @@
 
 ### Resources
 - Stack Overflow: postgis psql extension for gemoetry data type
+
+Add edit category page that lets you add existing restaurants
+Expand to Cafes and Bars
+Add M:N groups (with attribute name) to users Table and view that displays list of restaurants that have been added  

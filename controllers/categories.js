@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
             console.log(`User ${res.locals.currentUser.name} created a new category, ${newCategory.name}: ${wasCreated}`.brightCyan);
             if (!wasCreated) {
                 res.render('categories/new.ejs', {error: 'That category already exists'})
-            } else res.redirect('/categories');
+            } else res.redirect(`/categories/${newCategory.name}`);
         } catch (error) {
             console.log(error);
         }

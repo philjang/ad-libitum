@@ -30,7 +30,7 @@
                             <% for (let i=0;i<category.restaurants.length; i++) { %> 
                                 <% if(category.restaurants[i].id === selectedRestaurant.id) { %>
                                     <form action="/restaurants/<%=selectedRestaurant.id%>/rmfrom/<%=category.id%>" method="post">
-                                        <button class="btn btn-primary" type="submit"><i class="fas fa-ban"></i> &nbsp; Remove <%= selectedRestaurant.name %> from <%= category.name %> </button>
+                                        <button class="btn btn-secondary" type="submit"><i class="fas fa-ban"></i> &nbsp; Remove <%= selectedRestaurant.name %> from <%= category.name %> </button>
                                     </form>
                                     <% break; %>
                                 <% } else if (i===category.restaurants.length-1) { %>
