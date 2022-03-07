@@ -74,8 +74,8 @@ PORT=<portOfYourChoice>
 | ------ | -------------- | -------------------------------- |
 | GET | `/` | Display landing page |
 | GET | `/users/new` | Display new user form |
-| POST | `/users` | Creates a new user in db or find and redirect to profile |
-| GET | `/users/login` | Display login form or redirect to profile if logged in |
+| POST | `/users` | Creates a new user in db or display error message and re-render `GET /users/new` if it already exists |
+| GET | `/users/login` | Display login form or redirect to profile page if logged in |
 | GET | `/users/profile` | Display user home page with location types and categories |
 | POST | `/users/login` | Log user in if information is correct, display error message if not |
 | GET | `/users/logout` | Log user out, clear cookie, and redirect to landing page |
@@ -86,7 +86,7 @@ PORT=<portOfYourChoice>
 | GET | `/restaurants/edit/:id` | Display an editable form for the details of a restaurant |
 | GET | `/restaurants/:id/map` | Display a form to search for a new map |
 | GET | `/restaurants/mapresults` | Display a list of search results for new map |
-| PUT | `/restaurants/:id/map` | Update coordinates column in restaurant table for details page map |
+| PUT | `/restaurants/:id/map` | Updates coordinates column in restaurant table, to be used for map on details page |
 | POST | `restaurants/:id` | Creates a new menu item, then redirects back to `GET /restaurants/:id`, display error message if it already exists|
 | GET | `/restaurants/:id/newmenu` | Display a form for adding a new menu item |
 | GET | `/restaurants/:id` | Display details of a restaurant including note, map, and highlight menu items |
@@ -94,8 +94,8 @@ PORT=<portOfYourChoice>
 | POST | `/restaurants/:id/addcategory` | Create a new category and create an entry in the join table to associated category with restaurant, display error message if it already exists |
 | DELETE | `/restaurants/:id/rmfrom/:categoryId` | Delete an entry in the join table to dissociate category from restaurant, re-render toggler screen |
 | POST | `/restaurants/:id/addto/:categoryId` | Create an entry in the join table to associate category to restaurant, re-render toggler screen |
-| DELETE | `/restaurants/:id` | Deletes the specified restaurant |
-| DELETE | `/restaurants/:restaurantId/:menuId` | Deletes the specified highlight menu item |
+| DELETE | `/restaurants/:id` | Deletes the specified restaurant entry in db and redirects to `GET /restaurants` |
+| DELETE | `/restaurants/:restaurantId/:menuId` | Deletes the specified highlight menu item entry in db and redirects to the parent restaurant details page |
 | GET | `/categories` | Display a list of categories that belong to the user |
 | POST | `/categories` | Creates a new category, then redirects back to `GET /categories`, display error message and re-render form if it already exists|
 | GET | `/categories/1new` | Display a form for adding a new category |
@@ -114,7 +114,7 @@ PORT=<portOfYourChoice>
 | GET | `/cafes/edit/:id` | Display an editable form for the details of a cafe |
 | GET | `/cafes/:id/map` | Display a form to search for a new map |
 | GET | `/cafes/mapresults` | Display a list of search results for new map |
-| PUT | `/cafes/:id/map` | Update coordinates column in cafe table for details page map |
+| PUT | `/cafes/:id/map` | Updates coordinates column in cafe table, to be used for map on details page |
 | POST | `cafes/:id` | Creates a new menu item, then redirects back to `GET /cafes/:id`, display error message if it already exists|
 | GET | `/cafes/:id/newmenu` | Display a form for adding a new menu item |
 | GET | `/cafes/:id` | Display details of a cafe including note, map, and highlight menu items |
@@ -122,8 +122,8 @@ PORT=<portOfYourChoice>
 | POST | `/cafes/:id/addcategory` | Create a new category and create an entry in the join table to associated category with cafe, display error message if it already exists |
 | DELETE | `/cafes/:id/rmfrom/:categoryId` | Delete an entry in the join table to dissociate category from cafe, re-render toggler screen |
 | POST | `/cafes/:id/addto/:categoryId` | Create an entry in the join table to associate category to cafe, re-render toggler screen |
-| DELETE | `/cafes/:id` | Deletes the specified cafe |
-| DELETE | `/cafes/:cafeId/:menuId` | Deletes the specified highlight menu item |
+| DELETE | `/cafes/:id` | Deletes the specified cafe entry in db and redirects to `GET /cafes`|
+| DELETE | `/cafes/:cafeId/:menuId` | Deletes the specified highlight menu item entry in db and redirects to the parent cafe details page |
 | GET | `/ccategories` | Display a list of categories that belong to the user |
 | POST | `/ccategories` | Creates a new category, then redirects back to `GET /ccategories`, display error message and re-render form if it already exists|
 | GET | `/ccategories/1new` | Display a form for adding a new category |
