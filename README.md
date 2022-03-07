@@ -73,12 +73,12 @@ PORT=<portOfYourChoice>
 | Method | Path | Purpose |
 | ------ | -------------- | -------------------------------- |
 | GET | `/` | Display landing page |
-| GET | `/new` | Display new user form |
-| POST | `/new` | Creates a new user in db or find and redirect to profile |
-| GET | `/login` | Display login form or redirect to profile if logged in |
-| GET | `/profile` | Display user home page with location types and categories |
-| POST | `/login` | Log user in if information is correct, display error message if not |
-| GET | `/logout` | Log user out, clear cookie, and redirect to landing page |
+| GET | `/users/new` | Display new user form |
+| POST | `/users` | Creates a new user in db or find and redirect to profile |
+| GET | `/users/login` | Display login form or redirect to profile if logged in |
+| GET | `/users/profile` | Display user home page with location types and categories |
+| POST | `/users/login` | Log user in if information is correct, display error message if not |
+| GET | `/users/logout` | Log user out, clear cookie, and redirect to landing page |
 | GET | `/restaurants` | Display a list of saved restaurants |
 | POST | `/restaurants` | Creates a new restaurant, then redirects back to `GET /restaurants`, display error message and re-render form if it already exists |
 | GET | `/restaurants/new` | Display a form for adding a new restaurant |

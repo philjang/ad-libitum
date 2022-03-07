@@ -54,7 +54,9 @@ router.get('/login', (req,res) => {
 
 // user home page
 router.get('/profile', (req,res) => {
-    res.render('users/profile', {error: 'Unrecognized user'})
+    if (res.locals.currentUser) {
+        res.render('users/profile')
+    } else res.render('users/new.ejs', {error: 'Unrecognized user'})
 })
 
 // log in user
