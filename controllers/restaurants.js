@@ -263,7 +263,7 @@ router.post('/:id/addcategory', async (req,res)=>{
 })
 
 // unassociate restaurant from existing category route
-router.post('/:id/rmfrom/:categoryId', async (req,res) => {
+router.delete('/:id/rmfrom/:categoryId', async (req,res) => {
     if (res.locals.currentUser) {
         try {
             const selectedCategory = await db.category.findOne({
