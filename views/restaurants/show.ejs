@@ -1,4 +1,4 @@
-<section class="py-5 contact-section bg-dark">
+<section class="py-5 content-section bg-dark">
 <!-- Title -->
     <div class="container mb-1 bg-dark bg-opacity-50 py-5">
         <div class="column col-md-10 col-lg-8 mx-auto text-center">
@@ -52,7 +52,7 @@
             <!-- Edit Restaurant Link -->
             <div class="container bg-dark bg-opacity-50 mt-3 py-2">
                 <div class="col-md-9 col-lg-7 mx-auto text-center">
-                    <div class="card py-2 h-50">
+                    <div class="card backdrop-link py-2 h-50">
                         <div class="card-body text-center">
                             <h4 class="text-uppercase m-0">
                                 <a href="/restaurants/edit/<%= selectedRestaurant.id %>">
@@ -93,7 +93,7 @@
             </div>
             <!-- No Category Message -->
             <% if(!selectedRestaurant.categories[0]) { %> 
-                <div class="container bg-dark bg-opacity-50 py-5">
+                <div class="container bg-dark bg-opacity-50 py-2">
                     <div class="col-md-10 col-lg-8 mx-auto text-center">
                         <div class="card py-4 h-100">
                             <div class="card-body text-center">
@@ -107,9 +107,9 @@
                 </div>
             <% } %> 
             <!-- Add Category Link -->
-            <div class="container bg-dark bg-opacity-50 mt-3 py-2">
+            <div class="container bg-dark bg-opacity-50 my-3 py-2">
                 <div class="col-md-9 col-lg-7 mx-auto text-center">
-                    <div class="card py-2 h-50">
+                    <div class="card backdrop-link py-2 h-50">
                         <div class="card-body text-center">
                             <h4 class="text-uppercase m-0">
                                 <a href="/restaurants/<%= selectedRestaurant.id %>/addcategory">
@@ -191,7 +191,7 @@
                 </div>
             <% } else { %>
             <!-- No Menu Highlights Message -->
-                <div class="container bg-dark bg-opacity-50 py-5">
+                <div class="container bg-dark bg-opacity-50 py-2">
                     <div class="col-md-10 col-lg-8 mx-auto text-center">
                         <div class="card py-4 h-100">
                             <div class="card-body text-center">
@@ -207,7 +207,7 @@
             <!-- Add New Menu Link -->
             <div class="container bg-dark bg-opacity-50 mt-3 py-2">
                 <div class="col-md-9 col-lg-7 mx-auto text-center">
-                    <div class="card py-2 h-50">
+                    <div class="card backdrop-link py-2 h-50">
                         <div class="card-body text-center">
                             <h4 class="text-uppercase m-0">
                                 <a href="/restaurants/<%= selectedRestaurant.id %>/newmenu">

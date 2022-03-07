@@ -32,10 +32,10 @@ input {
     background-color:rgba(255, 255, 255, 0.1)
 }
 
-.black {
-    padding-top: 10rem;
-    background-color: black;
+.backdrop-link {
+    background-color: #c5c5c5;
 }
+
 @media (min-width: 992px) {
     .black {
         padding-top: 15rem;
@@ -61,15 +61,8 @@ input {
 #below-login {
     background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.2) 90%, rgba(0, 0, 0, 1) 100%), url('../assets/img/signup.jpg');
     background-size: cover;
+    padding: 20rem 0;
 }
-
-.menu {
-    /* background-color: lightgray; */
-}
-.no-menu{
-    /* background-color: white; */
-}
-
 
 #map {
     /* position: absolute; */
@@ -86,7 +79,15 @@ input {
     }
 }
 
-#pang {
+#ad-lib {
     font-family: 'Comforter Brush', cursive;
     letter-spacing: .15rem;
+}
+
+.animate__animated.animate__fadeIn {
+    --animate-duration: 3s;
+}
+
+#user-type {
+    padding: 10rem 0;
 }

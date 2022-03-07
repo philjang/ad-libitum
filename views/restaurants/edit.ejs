@@ -1,4 +1,4 @@
-<section class="py-5 contact-section bg-dark">
+<section class="py-5 content-section bg-dark">
     <!-- Title -->
     <div class="container mb-1 bg-dark bg-opacity-50 py-5">
         <div class="col-md-10 col-lg-8 mx-auto text-center">
@@ -131,7 +131,7 @@
                                     <h6 class="text-lowercase">Description: <%= menuItem.description %></h6>
                                     <h6 class="mb-4 text-lowercase">Price: $<%= menuItem.price %></h6>
                                     <form action="/restaurants/<%=selectedRestaurant.id%>/<%=menuItem.id%>/?_method=DELETE" method="post">
-                                        <button class="btn btn-primary" type="submit"> <i class="fas fa-ban"></i> &nbsp; Delete item</button>
+                                        <button class="btn btn-secondary" type="submit"> <i class="fas fa-ban"></i> &nbsp; Delete item</button>
                                     </form>
 
                                 </div>
@@ -159,7 +159,7 @@
             <div class="container bg-dark bg-opacity-50 py-5">
                 <div class="col-md-10 col-lg-8 mx-auto text-center">
                     <form action="/restaurants/<%= selectedRestaurant.id %>/?_method=DELETE" method="post">
-                        <button class="btn btn-primary" type="submit"><i class="fas fa-trash-alt"></i>  &nbsp; Delete This Restaurant</button>
+                        <button class="btn btn-secondary" type="submit"><i class="fas fa-trash-alt"></i>  &nbsp; Delete This Restaurant</button>
                     </form>
                 </div>
             </div>
