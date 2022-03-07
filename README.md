@@ -8,27 +8,27 @@ As a lover of food and gatherings with family and close friends, I have for year
 ## Installation Instructions
 
 - Fork and clone code to desired directory, then run `npm i` to install dependencies:
-<details>
-  <summary> list </summary>
+    <details>
+      <summary> list </summary>
 
-  - axios
-  - bcrypt
-  - colors
-  - cookie-parser
-  - crypto-js
-  - dotenv
-  - ejs
-  - express
-  - express-ejs-layouts
-  - mapbox-gl
-  - method-override
-  - pg
-  - sequelize
-  - sequelize-cli
+      - axios
+      - bcrypt
+      - colors
+      - cookie-parser
+      - crypto-js
+      - dotenv
+      - ejs
+      - express
+      - express-ejs-layouts
+      - mapbox-gl
+      - method-override
+      - pg
+      - sequelize
+      - sequelize-cli
 
-</details>
+    </details>
 
-- Run `createdb <desiredDatabaseName>` in your terminal (command to create database may differ for WSL)
+- Run `createdb pangs`(edit config.json if custom name is desired) in your terminal (command to create database may differ for WSL)
 - Run `sequelize db:migrate` in your terminal to create the necessary tables
 - In browser, go to https://account.mapbox.com/auth/signup and sign up for a free account for the Mapbox Geocoding API
 - Copy API key into a .env file
