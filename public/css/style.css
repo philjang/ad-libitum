@@ -21,7 +21,7 @@ input {
 }
 
 .padding-vert {
-    padding: 10rem 0rem;
+    padding: 8rem 0rem;
 }
 
 .backdrop {
@@ -85,7 +85,7 @@ input {
 }
 
 .animate__animated.animate__fadeIn {
-    --animate-duration: 3s;
+    --animate-duration: 2s;
 }
 
 #user-type {

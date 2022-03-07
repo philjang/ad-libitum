@@ -1,0 +1,59 @@
+<section class="content-section bg-dark"></section>
+        <div class="bg-dark pb-5">
+            
+            <!-- Title -->
+            <div class="container py-5">
+                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                    <h2 class="text-white">New Menu Highlight</h2>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="container backdrop-lt px-4 px-lg-5">
+                <div class="row py-4 gx-4 gx-lg-5">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+
+                        <i class="fas fa-file-signature fa-2x mb-3 text-white"></i>
+
+                        <form action="/cafes/<%= cafeId %>" method="post">
+                            <div class="mb-4">
+                                <label class="text-white" for="name">Name:</label>
+                                <input class="form-control" autocomplete="off" type="name" name="name" id="name" required>
+                            </div>
+                        
+                            <div class="mb-4">
+                                <label class="text-white" for="description">Description:</label>
+                                <textarea class="form-control" autocomplete="off" type="text area" name="description" id="description"></textarea>
+                            </div>
+                        
+                            <div class="mb-4">
+                                <label class="text-white" for="price">Price:</label>
+                                <input class="form-control" autocomplete="off" type="number" name="price" id="price" required>
+                            </div>
+                        
+                            <button class="btn btn-primary" type="submit"><i class="fas fa-plus"></i> &nbsp; Add New Menu Item!</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+                <!-- Back to Restaurant Details -->
+                <div class="container bg-dark bg-opacity-50 py-5">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+                        <div class="card backdrop-link py-2 mx-auto">
+                            <div class="card-body text-center">
+                                <h6 class="text-uppercase m-0">
+                                    <a href="/cafes/<%= cafeId %>">
+                                        <i class="fas fa-angle-double-right"></i>
+                                        Back to <%= cafeName %> Details Page
+                                        <i class="fas fa-angle-double-left"></i>
+                                    </a>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+        </div>
+</section>

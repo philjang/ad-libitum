@@ -1,0 +1,167 @@
+<section class="py-5 content-section bg-dark">
+    <!-- Title -->
+    <div class="container mb-1 bg-dark bg-opacity-50 py-5">
+        <div class="col-md-10 col-lg-8 mx-auto text-center">
+            <h2 class="text-white"><i class="fas fa-tools text-primary"></i> &nbsp;Editing <%= selectedCafe.name %></h2>
+        </div>
+    </div>
+    
+    <!-- Page Content -->
+    <div class="row mx-0 justify-content-center">
+        <!-- Column 1 -->
+        <div class="col-md-6 col-lg-5 justify-content-start">
+
+            <!-- Edit Details -->
+            <div class="container bg-dark bg-opacity-50 py-2">
+                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                    <h2 class="text-white">
+                        New Values
+                        <i class="fas fa-level-down-alt"></i>
+                    </h2>
+                </div>
+            </div>
+            <!-- Form -->
+            <div class="backdrop-lt container px-4 px-lg-5">
+                <div class="row py-4 gx-4 gx-lg-5">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+                        <i class="fas fa-file-signature fa-2x mb-3 text-white"></i>
+                        <form action="/cafes/<%=selectedCafe.id %>/?_method=put" method="post">
+                            <div class="mb-4">
+                                <label class="text-white" for="name">Name:</label>
+                                <input class="form-control" autocomplete="off" type="name" name="name" id="name" value="<%= selectedCafe.name %>" required>
+                            </div>
+                        
+                            <div class="mb-4">
+                                <label class="text-white" for="address">Address:</label>
+                                <input class="form-control" autocomplete="off" type="text" name="address" id="address" value="<%= selectedCafe.address %>">
+                            </div>
+                        
+                            <div class="mb-4">
+                                <label class="text-white" for="note">Note:</label>
+                                <textarea class="form-control" autocomplete="off" type="text area" name="note" id="note"><%= selectedCafe.note %></textarea>
+                            </div>
+                        
+                            <div class="mb-4">
+                                <label class="text-white" for="rating">Rating:</label>
+                                <input class="form-control" type="number" name="rating" id="rating" value="<%= selectedCafe.rating %>" required>
+                            </div>
+                        
+                            <button class="btn btn-primary" type="submit"><i class="fas fa-paper-plane"></i> &nbsp; Submit Edits</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Values -->
+            <div class="container bg-dark bg-opacity-50 pt-5 pb-2">
+                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                    <h2 class="text-white">
+                        Current Values
+                        <i class="fas fa-level-down-alt"></i>
+                    </h2>
+                </div>
+            </div>
+            <div class="container bg-dark bg-opacity-50 py-2">
+                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                    <div class="card py-2 h-50">
+                        <div class="card-body text-center">
+                            <h4 class="text-uppercase m-0">
+                                <i class="fas fa-angle-double-right"></i>
+                                Address: <%= selectedCafe.address %>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container bg-dark bg-opacity-50 py-2">
+                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                    <div class="card py-2 h-50">
+                        <div class="card-body text-center">
+                            <h4 class="text-lowercase m-0">
+                                <i class="fas fa-angle-double-right"></i>
+                                Note: <%= selectedCafe.note %>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container bg-dark bg-opacity-50 py-2">
+                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                    <div class="card py-2 h-50">
+                        <div class="card-body text-center">
+                            <h4 class="text-uppercase m-0">
+                                <i class="fas fa-angle-double-right"></i>
+                                Rating: <%= selectedCafe.rating %>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Column 2 -->
+        <div class="col-md-6 col-lg-5">
+            <!-- Back to Details -->
+            <div class="container bg-dark bg-opacity-50 my-3 py-2">
+                <div class="col-md-9 col-lg-7 mx-auto text-center">
+                    <div class="card py-2 h-50">
+                        <div class="card-body text-center">
+                            <h4 class="text-uppercase m-0">
+                                <a href="/cafes/<%= selectedCafe.id %>">
+                                    <i class="fas fa-check"></i> 
+                                    __Back to Details
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Edit Menu Highlights -->
+            <% if (cafeMenuArr[0]) { %>
+                <div class="container px-0 px-lg-0 align-items-center">
+                    <div class="row mx-0 gx-0 gy-2 py-2 container align-content-around justify-content-around">
+                        <% cafeMenuArr.forEach(menuItem => { %>
+                        <div class="col-md-5 mx-1 mb-3">
+                            <div class="card pt-3 pb-2 h-100">
+                                <div class="card-body text-center">
+                                    
+                                    <h3 class="text-uppercase mt-2 m-0"><%= menuItem.name %></h3>
+                                    <hr class="mt-3 mb-2 mx-auto" />
+                                    <h6 class="text-lowercase">Description: <%= menuItem.description %></h6>
+                                    <h6 class="mb-4 text-lowercase">Price: $<%= menuItem.price %></h6>
+                                    <form action="/cafes/<%=selectedCafe.id%>/<%=menuItem.id%>/?_method=DELETE" method="post">
+                                        <button class="btn btn-secondary" type="submit"> <i class="fas fa-ban"></i> &nbsp; Delete item</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %> 
+                    </div>
+                </div>
+            <% } else { %>
+            <!-- No Menu Highlights Message -->
+                <div class="container bg-dark bg-opacity-50 py-5">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+                        <div class="card py-4 h-100">
+                            <div class="card-body text-center">
+                                <h4 class="text-uppercase m-0">
+                                    <i class="fas fa-exclamation-circle"></i> &nbsp;
+                                    No Menu Highlights To Display
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+            <!-- Delete Cafe Button -->
+            <div class="container bg-dark bg-opacity-50 py-5">
+                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                    <form action="/cafes/<%= selectedCafe.id %>/?_method=DELETE" method="post">
+                        <button class="btn btn-secondary" type="submit"><i class="fas fa-trash-alt"></i>  &nbsp; Delete This Cafe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+</section>

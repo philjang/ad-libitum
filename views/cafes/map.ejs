@@ -1,0 +1,37 @@
+<section class="content-section bg-dark"></section>
+        <div class="bg-dark pb-5">
+            
+            <!-- Title -->
+            <div class="container py-5">
+                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                    <h2 class="text-white">Search for the Right Place</h2>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="container backdrop-lt px-4 px-lg-5">
+                <div class="row py-4 gx-4 gx-lg-5">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+
+                        <i class="fas fa-map-marked-alt fa-2x mb-3 text-white"></i>
+
+                        <form action="/cafes/mapresults" method="get">
+                            <div class="mb-4">
+                                <label class="text-white" for="name">Name:</label>
+                                <input class="form-control" autocomplete="off" type="name" name="name" id="name" placeholder="<%=cafeName%>" required>
+                            </div>
+                        
+                            <div class="mb-4">
+                                <label class="text-white" for="address">Address:</label>
+                                <input class="form-control" autocomplete="off" type="text" name="address" id="address" placeholder="<%= cafeAddress %> ">
+                            </div>
+                            <input type="hidden" name="id" value="<%=cafeId%>">
+                            <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> &nbsp; Search</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</section>

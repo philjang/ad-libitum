@@ -33,6 +33,8 @@ app.use(async (req,res,next) => {
 app.use('/users', require('./controllers/users.js'))
 app.use('/restaurants', require('./controllers/restaurants.js'))
 app.use('/categories', require('./controllers/categories.js'))
+app.use('/cafes', require('./controllers/cafes.js'))
+app.use('/ccategories', require('./controllers/ccategories.js'))
 
 app.get('/', (req,res)=> {
     res.render('home.ejs')

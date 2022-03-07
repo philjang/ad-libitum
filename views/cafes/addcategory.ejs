@@ -1,0 +1,96 @@
+<section class="padding-top content-section bg-dark">
+    <!-- Title -->
+        <div class="container bg-dark bg-opacity-50 py-3">
+            <div class="col-md-10 col-lg-8 mx-auto text-center">
+                <h2 class="text-white"><i class="fas fa-folder-open text-primary"></i> &nbsp;Pick from Below or Add a <a href='#new-bottom'>New Cafe Category</a></h2>
+                <% if(error) { %> 
+                    <div class="animate__animated animate__flash"><em ><%= error %> </em></div>
+                <% } %> 
+            </div>
+        </div>
+    </section>
+    <!-- Category Toggler -->
+    
+    <section class="content-section bg-dark">
+        <div class="container px-4 px-lg-5">
+            <div class="row gy-5 gx-4 gx-lg-5">
+    
+                <% categoryArr.forEach(category => { %>
+    
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card py-4 h-100">
+                        <div class="card-body text-center">
+    
+                            <h4 class="text-uppercase m-0"><%= category.name %></h4>
+    
+                            <hr class="my-4 mx-auto" />
+    
+                             <!-- simplify later if possible -->
+                            <% if(category.caves[0]) { %> 
+                                <% for (let i=0;i<category.caves.length; i++) { %> 
+                                    <% if(category.caves[i].id === selectedCafe.id) { %>
+                                        <form action="/cafes/<%=selectedCafe.id%>/rmfrom/<%=category.id%>" method="post">
+                                            <button class="btn btn-secondary" type="submit"><i class="fas fa-ban"></i> &nbsp; Remove <%= selectedCafe.name %> from <%= category.name %> </button>
+                                        </form>
+                                        <% break; %>
+                                    <% } else if (i===category.caves.length-1) { %>
+                                        <form action="/cafes/<%=selectedCafe.id%>/addto/<%=category.id%>" method="post">
+                                            <button class="btn btn-primary" type="submit"><i class="fas fa-plus"></i> &nbsp; Add <%= selectedCafe.name %> to <%= category.name %> </button>
+                                        </form>
+                                    <% } %> 
+                                <% } %> 
+                            <% } else { %>
+                                <form action="/cafes/<%=selectedCafe.id%>/addto/<%=category.id%>" method="post">
+                                    <button class="btn btn-primary" type="submit"><i class="fas fa-plus"></i> &nbsp; Add <%= selectedCafe.name %> to <%= category.name %> </button>
+                                </form>
+                            <% } %> 
+    
+                        </div>
+                    </div>
+                </div>
+    
+                <% }) %>
+    
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section bg-dark" id="new-bottom"></section>
+            <div class="bg-dark pb-5">
+                <!-- Add New Category Form -->
+                <div class="container backdrop-lt px-4 px-lg-5">
+                    <div class="row py-4 gx-4 gx-lg-5">
+                        <div class="col-md-10 col-lg-8 mx-auto text-center">
+    
+                            <i class="fas fa-file-signature fa-2x mb-3 text-white"></i>
+                            <form action="/cafes/<%=selectedCafe.id%>/addcategory" method="post">
+                                <div class="mb-4">
+                                    <label class="text-white" for="name">New Cafe Category Name:</label>
+                                    <input class="form-control" autocomplete="off" type="name" name="name" id="name" required>
+                                </div>
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-plus"></i> &nbsp; Add <%=selectedCafe.name%> to this New Category
+                                </button>
+                            </form>
+    
+                        </div>
+                    </div>
+                </div>
+                <!-- Back to Restaurant Details -->
+                <div class="container bg-dark bg-opacity-50 py-5">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+                        <div class="card backdrop-link py-2 mx-auto">
+                            <div class="card-body text-center">
+                                <h6 class="text-uppercase m-0">
+                                    <a href="/cafes/<%= selectedCafe.id %>">
+                                        <i class="fas fa-angle-double-right"></i>
+                                        Back to <%= selectedCafe.name %> Details Page
+                                        <i class="fas fa-angle-double-left"></i>
+                                    </a>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>

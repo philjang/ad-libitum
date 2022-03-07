@@ -1,0 +1,225 @@
+<section class="py-5 content-section bg-dark">
+    <!-- Title -->
+        <div class="container mb-1 bg-dark bg-opacity-50 py-5">
+            <div class="column col-md-10 col-lg-8 mx-auto text-center">
+                <h2 class="text-white"><i class="fas fa-coffee text-primary"></i> &nbsp;<%= selectedCafe.name %></h2>
+                <% if(error) { %> 
+                    <div class="animate__animated animate__flash"><em ><%= error %> </em></div>
+                <% } %> 
+            </div>
+        </div>
+    <!-- Page Content -->
+        <div class="row mx-0 justify-content-center">
+            <!-- Column 1 -->
+            <div class="col-md-6 col-lg-5 justify-content-start">
+                <!-- Restaurant Details -->
+                <div class="container bg-dark bg-opacity-50 py-2">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+                        <div class="card py-2 h-50">
+                            <div class="card-body text-center">
+                                <h4 class="text-uppercase m-0">
+                                    <i class="fas fa-angle-double-right"></i>
+                                    Address: <%= selectedCafe.address %>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container bg-dark bg-opacity-50 py-2">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+                        <div class="card py-2 h-50">
+                            <div class="card-body text-center">
+                                <h4 class="text-lowercase m-0">
+                                    <i class="fas fa-angle-double-right"></i>
+                                    Note: <%= selectedCafe.note %>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container bg-dark bg-opacity-50 py-2">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+                        <div class="card py-2 h-50">
+                            <div class="card-body text-center">
+                                <h4 class="text-uppercase m-0">
+                                    <i class="fas fa-angle-double-right"></i>
+                                    Rating: <%= selectedCafe.rating %>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Edit Restaurant Link -->
+                <div class="container bg-dark bg-opacity-50 mt-3 py-2">
+                    <div class="col-md-9 col-lg-7 mx-auto text-center">
+                        <div class="card backdrop-link py-2 h-50">
+                            <div class="card-body text-center">
+                                <h4 class="text-uppercase m-0">
+                                    <a href="/cafes/edit/<%= selectedCafe.id %>">
+                                        <i class="fas fa-edit"></i> 
+                                        &nbsp; Edit Entry
+                                    </a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Associated Categories -->
+                <div class="container bg-dark bg-opacity-50 py-5">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+                        <h2 class="text-white">
+                            <i class="fas fa-folder-open text-primary"></i> &nbsp;
+                            Associated Categories
+                            <!-- <i class="fas fa-level-down-alt"></i> -->
+                        </h2>
+                    </div>
+                </div>
+                <!-- Categories List -->
+                <div class="container px-0 px-lg-0 align-items-center">
+                    <div class="row mx-0 gx-0 gy-2 py-2 container align-content-around justify-content-around">
+                        <% categoryArr.forEach(category => { %>
+                            <div class="col-md-5 mx-1 mb-3">
+                                <a href="/ccategories/<%= category.name %>">
+                                    <div class="card pt-3 pb-2 h-100">
+                                        <div class="card-body text-center">
+                                            <h4 class="text-uppercase mt-2 m-0"><%= category.name %></h4>
+                                            <hr class="mt-3 mb-0 mx-auto" />
+                                        </div>
+                                    </div>
+                                </a>       
+                            </div>
+                        <% }) %> 
+                    </div>
+                </div>
+                <!-- No Category Message -->
+                <% if(!selectedCafe.cafecategories[0]) { %> 
+                    <div class="container bg-dark bg-opacity-50 py-2">
+                        <div class="col-md-10 col-lg-8 mx-auto text-center">
+                            <div class="card py-4 h-100">
+                                <div class="card-body text-center">
+                                    <h4 class="text-uppercase m-0">
+                                        <i class="fas fa-sync-alt"></i> &nbsp;
+                                        No Associated Categories Yet
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %> 
+                <!-- Add Category Link -->
+                <div class="container bg-dark bg-opacity-50 my-3 py-2">
+                    <div class="col-md-9 col-lg-7 mx-auto text-center">
+                        <div class="card backdrop-link py-2 h-50">
+                            <div class="card-body text-center">
+                                <h4 class="text-uppercase m-0">
+                                    <a href="/cafes/<%= selectedCafe.id %>/addcategory">
+                                        <i class="fas fa-edit"></i>
+                                        &nbsp; Edit Categories
+                                    </a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Column 2 -->
+            <div class="col-md-6 col-lg-5">
+                <!-- map -->
+                <div class="row justify-content-center pt-3">
+                    <% if (selectedCafe.coordinates.coordinates[1] === 85) { %>
+                        <p class="text-white text-center">No Map Available</p>
+                    <% } %>
+                    <div id='map'></div>
+                </div>
+                <script>
+                    mapboxgl.accessToken = '<%= mapkey %>';
+                    const map = new mapboxgl.Map({
+                        container: 'map', // container ID
+                        style: 'mapbox://styles/mapbox/streets-v11', // style URL
+                        center: [<%=selectedCafe.coordinates.coordinates%>], // starting position [lng, lat]
+                        zoom: 17 // starting zoom
+                    });
+                    const marker = new mapboxgl.Marker()
+                    .setLngLat([<%=selectedCafe.coordinates.coordinates%>])
+                    .addTo(map);
+                </script>
+    
+                <!-- Edit Map -->
+                <div class="container bg-dark bg-opacity-50 mt-3 py-2">
+                    <div class="col-md-6 col-lg-5 mx-auto text-center">
+                        <div class="card py-2 h-50">
+                            <div class="card-body text-center">
+                                <h4 class="text-uppercase m-0">
+                                    <a href="/cafes/<%=selectedCafe.id%>/map">
+                                        <i class="fas fa-edit"></i> &nbsp; Wrong Map
+                                    </a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Menu Highlights -->
+                <div class="container bg-dark bg-opacity-50 py-5">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+                        <h2 class="text-white">
+                            <i class="fas fa-star text-primary"></i> &nbsp;
+                            Menu Highlights
+                            <!-- <i class="fas fa-level-down-alt"></i> -->
+                        </h2>
+                    </div>
+                </div>
+                <!-- Menu Highlight List -->
+                <% if (cafeMenuArr[0]) { %>
+                    <div class="container px-0 px-lg-0 align-items-center">
+                        <div class="row mx-0 gx-0 gy-2 py-2 container align-content-around justify-content-around">
+                            <% cafeMenuArr.forEach(menuItem => { %>
+                            <div class="col-md-5 mx-1 mb-3">
+                                <div class="card pt-3 pb-2 h-100">
+                                    <div class="card-body text-center">
+                                        
+                                        <h3 class="text-uppercase mt-2 m-0"><%= menuItem.name %></h3>
+                                        <hr class="mt-3 mb-2 mx-auto" />
+                                        <h6 class="text-lowercase">Description: <%= menuItem.description %></h6>
+                                        <h6 class="text-lowercase">Price: $<%= menuItem.price %></h6>
+    
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %> 
+                        </div>
+                    </div>
+                <% } else { %>
+                <!-- No Menu Highlights Message -->
+                    <div class="container bg-dark bg-opacity-50 py-2">
+                        <div class="col-md-10 col-lg-8 mx-auto text-center">
+                            <div class="card py-4 h-100">
+                                <div class="card-body text-center">
+                                    <h4 class="text-uppercase m-0">
+                                        <i class="fas fa-heart-broken"></i> &nbsp;
+                                        No Menu Highlights Yet...
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+                <!-- Add New Menu Link -->
+                <div class="container bg-dark bg-opacity-50 mt-3 py-2">
+                    <div class="col-md-9 col-lg-7 mx-auto text-center">
+                        <div class="card backdrop-link py-2 h-50">
+                            <div class="card-body text-center">
+                                <h4 class="text-uppercase m-0">
+                                    <a href="/cafes/<%= selectedCafe.id %>/newmenu">
+                                        <i class="fas fa-angle-double-right"></i>
+                                            Add a New Favorite
+                                        <i class="fas fa-angle-double-left"></i>
+                                    </a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

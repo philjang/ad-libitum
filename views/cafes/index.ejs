@@ -1,0 +1,40 @@
+<section class="padding-top content-section bg-dark">
+    <!-- Title -->
+        <div class="container bg-dark bg-opacity-50 py-3">
+            <div class="col-md-10 col-lg-8 mx-auto text-center">
+                <h2 class="text-white"><i class="fas fa-coffee text-primary"></i> &nbsp;Your Cafes</h2>
+            </div>
+        </div>
+    <!-- Cafe List -->
+        <div class="container px-4 px-lg-5 align-items-center">
+            <div class="row mx-0 gx-4 gy-5 gx-lg-5 py-4 py-lg-5 container align-content-around justify-content-around">
+                <% cafeArr.forEach(cafe => { %>
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <a href="/cafes/<%= cafe.id %>">
+                            <div class="card py-4 h-100">
+                                <div class="card-body text-center">
+                                    <h4 class="text-uppercase m-0"><%= cafe.name %></h4>
+                                    <hr class="mb-1 mt-4 mx-auto" />
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    <!-- Add New Cafe Link -->
+        <div class="container bg-opacity-50 py-5">
+            <div class="col-md-10 col-lg-8 mx-auto text-center">
+                <div class="card backdrop-link py-4 h-100">
+                    <div class="card-body text-center">
+                        <h4 class="text-uppercase m-0">
+                            <a href="/cafes/new">
+                                <i class="fas fa-angle-double-right"></i>___Add New Cafe___<i class="fas fa-angle-double-left"></i>
+                            </a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </section>

@@ -1,0 +1,35 @@
+<section class="padding-top content-section bg-dark">
+    <!-- Title -->
+        <div class="container bg-dark bg-opacity-50 py-3">
+            <div class="col-md-10 col-lg-8 mx-auto text-center">
+                <h2 class="text-white"><i class="fas fa-folder-open text-primary"></i> &nbsp;<%= selectedCategory.name %></h2>
+            </div>
+        </div>
+    <!-- Restaurant List in Category -->
+        <div class="container px-4 px-lg-5 align-items-center">
+            <div class="row mx-0 gx-4 gy-5 gx-lg-5 py-4 py-lg-5 container align-content-around justify-content-around">
+                <% cafeArr.forEach(cafe => { %>
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <a href="/cafes/<%= cafe.id %>">
+                            <div class="card py-4 h-100">
+                                <div class="card-body text-center">
+                                    <h4 class="text-uppercase m-0"><%= cafe.name %></h4>
+                                    <hr class="mb-1 mt-4 mx-auto" />
+                                </div>
+                            </div>
+                        </a>        
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    
+    <!-- Delete Category Button -->
+        <div class="container bg-dark bg-opacity-50 py-5">
+            <div class="col-md-10 col-lg-8 mx-auto text-center">
+                <form action="/ccategories/<%= selectedCategory.name %>/?_method=DELETE" method="post">
+                    <button class="btn btn-secondary" type="submit"><i class="fas fa-trash-alt"></i>  &nbsp; Delete This Cafe Category...</button>
+                </form>
+            </div>
+        </div>
+    
+    </section>
