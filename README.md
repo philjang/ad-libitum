@@ -1,64 +1,17 @@
-# Pangs
+# ad Libitum
 
 ## Project Idea and Description
  - A fullstack application that allows users to save their favorite restaurants for future reference! Users can also save their favorite menu items and record notes on their experience.
 
-## API 
-- Mapbox Geocoding API
-- Request URL
-	- https://api.mapbox.com/geocoding/v5/mapbox.places/fremont%20bowl.json?types=address%2Cpoi&access_token=YOUR_MAPBOX_ACCESS_TOKEN
-- Response
-```json
-{
-  "type": "FeatureCollection",
-  "query": ["fremont", "bowl"],
-  "features": [
-    {
-      "id": "poi.1279900271475",
-      "type": "Feature",
-      "place_type": ["poi"],
-      "relevance": 1,
-      "properties": {
-        "foursquare": "5a1b300ec47cf927fe903663",
-        "landmark": true,
-        "address": "4258 Fremont Ave N",
-        "category": "sushi restaurant, sushi, japanese restaurant, japanese food, restaurant"
-      },
-      "text": "Fremont Bowl",
-      "place_name": "Fremont Bowl, 4258 Fremont Ave N, Seattle, Washington 98103, United States",
-      "center": [-122.350019, 47.659101],
-      "geometry": {"coordinates": [-122.350019, 47.659101], "type": "Point"},
-      "context": [
-        {"id": "neighborhood.8166201025628200", "text": "Fremont"},
-        {"id": "postcode.9998848571717140", "text": "98103"},
-        {
-          "id": "place.6907264716229470",
-          "wikidata": "Q5083",
-          "text": "Seattle"
-        },
-        {
-          "id": "district.9122689011421610",
-          "wikidata": "Q108861",
-          "text": "King County"
-        },
-        {
-          "id": "region.9713796497246050",
-          "short_code": "US-WA",
-          "wikidata": "Q1223",
-          "text": "Washington"
-        },
-        {
-          "id": "country.19678805456372290",
-          "wikidata": "Q30",
-          "short_code": "us",
-          "text": "United States"
-        }
-      ]
-    }
-  ],
-  "attribution": "NOTICE: © 2022 Mapbox and its suppliers. All rights reserved. Use of this data is subject to the Mapbox Terms of Service (https://www.mapbox.com/about/maps/). This response and the information it contains may not be retained. POI(s) provided by Foursquare."
-}
-```
+## Installation Instructions
+
+## Link to Current Version
+
+[ad-Libitum on Heroku](https://ad-libitum-deploy.herokuapp.com)
+
+## Technologies Used
+
+## Development Approach
 
 ## ERD
 
@@ -108,29 +61,35 @@
 - As a user, I want to make custom categories to sort my favorite restaurants.
 
 ## MVP Goals
-- Welcome home page that renders login/signup
-- User profile page that displays user's saved restaurants
-- User will be able to access a details page for each restaurant, which will contain:
-	- A note made by user, which can be edited if needed
-	- A map of the immediate vicinity of the restaurant
-	- Favorite menu items from the restaurant
-- User will be able to create custom categories to organize the list of restaurants
-	- e.g. "Go-To", "Comfort", "Sushi All-stars", "Too Pricey for Tuesday"
+[x] Welcome home page that renders login/signup
+[x] User profile page that displays user's saved restaurants - ended up having a separate profile page and indices for each type of location
+[x] User will be able to create custom categories to organize the list of restaurants (e.g. "Go-To", "Comfort", "Sushi All-stars", "Too Pricey for Tuesday")
+[x] User will be able to access a details page for each restaurant, which will contain:
+[x] A note made by user, which can be edited if needed
+[x] A map of the immediate vicinity of the restaurant
+[x] Favorite menu items from the restaurant
 
 ## Stretch Goals
-- User created groups to connect to other users (e.g. Family Favorites, Homie Favorites)
-- Other user lists (e.g. cafes, bars, dessert spots, etc.)
-- Randomized restaurant/menu item picker
-- Responsive design for use on mobile
-- Display ETA/estimated distance/embedded navigation link
-- Ability to add user photos for restaurant or menu items
+[x] Responsive design for use on various screen sizes
+[x] Other user lists (e.g. cafes, bars, dessert spots, etc.) - more to be added
+[] User created groups to connect to other users (e.g. Family Favorites, Homie Favorites)
+  - Add M:N linking groups (with attribute name) to users table and view that displays list of places that have been added by everyone in the group (later add a details page that links to recommended menu items)
+[] Randomized restaurant/menu item picker
+[] Display ETA/estimated distance/embedded navigation link (for mobile)
+[] Ability to add user photos for restaurant or menu items (Not sure if possible with just postgres)
 
-
-### Link to Current Version
+### Post-project Reflection
+- Overall, I would say that I am proud of what I was able to put together in a week's time! There were definitely times during the build that left me frustrated or stumped, but they ended up becoming great teaching moments as they led me to rabbit-holes of thought experiments and provided an opportunity to learn some of the intricacies of the many technologies available. Really starting to love the open-source culture of software development. There were many stretch goals that I could not get to quite yet, but I believe the additions of these features over time will really flesh out this project. In terms of user interface, adding an edit page directly connected to the category list page will likely improve user experience and flow. The final proof-of-concept implementation of the Cafe and Cafe Categories models leave a lot to be desired in terms of concision for the time being, but I have some ideas on a cleaner solution.
 
 ### Resources
-- Stack Overflow: postgis psql extension for gemoetry data type
-
-Add edit category page that lets you add existing restaurants
-Expand to Cafes and Bars
-Add M:N groups (with attribute name) to users Table and view that displays list of restaurants that have been added  
+- Mapbox Geocoding API/Mapbox GL JS (https://docs.mapbox.com/)
+- Stack Overflow: postgis psql extension for geometry data type
+- (https://sequelize.org/v6/)
+- (https://devcenter.heroku.com/categories/reference)
+- (https://app.diagrams.net/)
+- (https://fontawesome.com/icons)
+- (https://icons8.com/)
+- (https://startbootstrap.com/)
+- (https://getbootstrap.com/)
+- (https://unsplash.com/)
+- (https://animate.style/)
