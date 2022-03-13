@@ -28,11 +28,13 @@ As a lover of food and gatherings with family and close friends, I have for year
 
     </details>
 
-- Run `createdb pangs`(edit config.json if custom name is desired) in your terminal (command to create database may differ for WSL)
+- Run `createdb pangs`(edit config.json if custom database name is desired) in your terminal 
+    - above command is for Macs (developers should use the analogous command and make appropriate modifications to config.json based on their OS and Postgres)
 - Run `sequelize db:migrate` in your terminal to create the necessary tables
 - In browser, go to https://account.mapbox.com/auth/signup and sign up for a free account for the Mapbox Geocoding API
-- Copy API key into a .env file
-- The .env file should look like this
+- Create a `.env` file in the root directory
+- Copy the provided API key into the file along with the port and encryption string
+- The `.env` file should look like this
 ```
 MAPBOX_API_TOKEN=<yourApiKey>
 SECRET=<wordOfYourChoice>
