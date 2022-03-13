@@ -54,7 +54,7 @@ router.get('/login', (req,res) => {
 
 // user home page
 router.get('/profile', (req,res) => {
-    res.render('users/profile', {error: 'Unrecognized user'})
+    res.render('users/profile', {error: null})
 })
 
 // log in user

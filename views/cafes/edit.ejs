@@ -43,7 +43,7 @@
                         
                             <div class="mb-4">
                                 <label class="text-white" for="rating">Rating:</label>
-                                <input class="form-control" type="number" name="rating" id="rating" value="<%= selectedCafe.rating %>" required>
+                                <input class="form-control" type="number" name="rating" id="rating" value="<%= selectedCafe.rating %>" min="0" max="10" required>
                             </div>
                         
                             <button class="btn btn-primary" type="submit"><i class="fas fa-paper-plane"></i> &nbsp; Submit Edits</button>
