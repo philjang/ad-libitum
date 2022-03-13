@@ -28,6 +28,7 @@ router.post('/', async (req,res) => {
             newUser.name = req.body.name
             await newUser.save()
 
+            console.log(`A new user was created with the name, ${newUser.name}!`.brightCyan)
             // encrypt the user id via AES (advanced encryption standard)
             // .encrypt(userid but changed to string, secret string stored in .env file) takes two arguments
             const encryptedUserId = cryptojs.AES.encrypt(newUser.id.toString(), process.env.SECRET)
@@ -70,7 +71,7 @@ router.post('/login', async (req,res) =>{
             console.log('Incorrect Password')
             res.render('users/login.ejs', {error: 'Invalid email/password'})
         } else {
-            console.log('logging in the user!')
+            console.log(`logging in user, ${user.name}!`.brightCyan)
             // same as new user sign up route
             const encryptedUserId = cryptojs.AES.encrypt(user.id.toString(), process.env.SECRET)
             const encryptedUserIdString = encryptedUserId.toString()
