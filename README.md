@@ -29,7 +29,7 @@ As a lover of food and gatherings with family and close friends, I have for year
     </details>
 
 - Run `createdb pangs`(edit config.json if custom database name is desired) in your terminal 
-    - above command is for Macs (developers should use the analogous command and make appropriate modifications to config.json based on their OS and Postgres)
+    - Above command is for Macs (developers should use the analogous command and make appropriate modifications to config.json based on their OS and Postgres)
 - Run `sequelize db:migrate` in your terminal to create the necessary tables
 - In browser, go to https://account.mapbox.com/auth/signup and sign up for a free account for the Mapbox Geocoding API
 - Create a `.env` file in the root directory
