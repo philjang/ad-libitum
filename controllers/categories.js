@@ -55,8 +55,12 @@ router.get('/:name', async (req, res) => {
                 },
                 include: [db.restaurant]
             });
-            const restaurants = selectedCategory.restaurants
-            res.render('categories/show.ejs', {restaurantArr: restaurants,selectedCategory});
+            if (!selectedCategory) {
+                res.render('users/profile.ejs', {error: "Unauthorized action"})
+            } else {
+                const restaurants = selectedCategory.restaurants
+                res.render('categories/show.ejs', {restaurantArr: restaurants,selectedCategory});
+            }
         } catch (error) {
             console.log(error);
         }

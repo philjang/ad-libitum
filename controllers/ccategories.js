@@ -55,8 +55,12 @@ router.get('/:name', async (req, res) => {
                 },
                 include: [db.cafe]
             });
-            const cafes = selectedCategory.caves
-            res.render('cafeCategories/show.ejs', {cafeArr: cafes,selectedCategory});
+            if (!selectedCategory) {
+                res.render('users/profile.ejs', {error: "Unauthorized action"})
+            } else {
+                const cafes = selectedCategory.caves
+                res.render('cafeCategories/show.ejs', {cafeArr: cafes,selectedCategory});
+            }
         } catch (error) {
             console.log(error);
         }

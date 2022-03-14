@@ -11,7 +11,7 @@ router.get('/', async (req,res)=>{
             const cafes = await db.cafe.findAll({
                 where: {userId: res.locals.currentUser.id}
             })
-            res.render('cafes/index.ejs', {cafeArr: cafes, error: null})
+            res.render('cafes/index.ejs', {cafeArr: cafes})
         } catch (error) {
             console.log(error)
         }
@@ -70,7 +70,7 @@ router.put('/:id', async (req,res)=>{
                 note: req.body.note,
                 rating: req.body.rating
             },{
-                where: {id: req.params.id}
+                where: {id: req.params.id,userId:res.locals.currentUser.id}
             })
             res.redirect(`/cafes/${req.params.id}`)
         } catch (error) {
@@ -90,8 +90,12 @@ router.get('/edit/:id', async (req,res)=>{
                 },
                 include: [db.cafemenu]
             })
-            const cafeMenuItems = selectedCafe.cafemenus
-            res.render('cafes/edit.ejs', {cafeMenuArr: cafeMenuItems, selectedCafe})
+            if (!selectedCafe) {
+                res.render('users/profile.ejs', {error: "Unauthorized action"})
+            } else {
+                const cafeMenuItems = selectedCafe.cafemenus
+                res.render('cafes/edit.ejs', {cafeMenuArr: cafeMenuItems, selectedCafe})
+            }
         } catch (error) {
             console.log(error)
         }
@@ -102,9 +106,13 @@ router.get('/edit/:id', async (req,res)=>{
 router.get('/:id/map', async (req,res) => {
     if (res.locals.currentUser) {
         const foundCafe = await db.cafe.findOne({
-            where: {id: req.params.id}
+            where: {id: req.params.id,userId:res.locals.currentUser.id}
         })
-        res.render('cafes/map.ejs', {cafeId: foundCafe.id, cafeName: foundCafe.name, cafeAddress: foundCafe.address})
+        if (!foundCafe) {
+            res.render('users/profile.ejs', {error: "Unauthorized action"})
+        } else {
+            res.render('cafes/map.ejs', {cafeId: foundCafe.id, cafeName: foundCafe.name, cafeAddress: foundCafe.address})
+        }
     } else res.redirect('/')
 })
 
@@ -112,11 +120,18 @@ router.get('/:id/map', async (req,res) => {
 router.get('/mapresults', async (req,res) => {
     if (res.locals.currentUser) {
         try {
-            const retrievedJSON = await axios.get("https://api.mapbox.com/geocoding/v5/mapbox.places/"+req.query.name+" "+req.query.address+".json?limit=10&types=address%2Cpoi&access_token="+process.env.MAPBOX_API_TOKEN)
-            const resultsArr = retrievedJSON.data.features
-            // console.log(resultsArr)
-            // console.log(retrievedJSON)
-            res.render('cafes/mapresults.ejs', {resultsArr, cafeId: req.query.id})
+            const foundCafe = await db.cafe.findOne({
+                where: {id: req.query.id}
+            })
+            if(foundCafe.userId !== res.locals.currentUser.id) {
+                res.render('users/profile.ejs', {error: "Unauthorized action"})
+            } else {
+                const retrievedJSON = await axios.get("https://api.mapbox.com/geocoding/v5/mapbox.places/"+req.query.name+" "+req.query.address+".json?limit=10&types=address%2Cpoi&access_token="+process.env.MAPBOX_API_TOKEN)
+                const resultsArr = retrievedJSON.data.features
+                // console.log(resultsArr)
+                // console.log(retrievedJSON)
+                res.render('cafes/mapresults.ejs', {resultsArr, cafeId: req.query.id})
+            }
         } catch (error) {
             console.log(error)
         }
@@ -131,7 +146,7 @@ router.put('/:id/map', async (req,res) => {
             await db.cafe.update({
                 coordinates: {type: 'Point', coordinates: [req.body.lon, req.body.lat], crs: { type: 'name', properties: { name: 'EPSG:4326'} } }
             }, {
-                where: {id: req.params.id}
+                where: {id: req.params.id, userId: res.locals.currentUser.id}
             })
             console.log(`cafe with id #${req.params.id} updated with new coordinates: ${req.body.lon}, ${req.body.lat}`.brightCyan)
             res.redirect(`/cafes/${req.params.id}`)
@@ -182,8 +197,12 @@ router.get('/:id/newmenu', async (req,res) => {
             const foundCafe = await db.cafe.findOne({
                 where: {id: req.params.id}
             })
-            const cafeName = foundCafe.name
-            res.render('cafes/newmenu.ejs', {cafeId: req.params.id, cafeName})
+            if(foundCafe.userId !== res.locals.currentUser.id) {
+                res.render('users/profile.ejs', {error: "Unauthorized action"})
+            } else {
+                const cafeName = foundCafe.name
+                res.render('cafes/newmenu.ejs', {cafeId: req.params.id, cafeName})
+            }
         } catch (error) {
             console.log(error)
         }
@@ -201,9 +220,13 @@ router.get('/:id', async (req,res)=>{
                 },
                 include: [db.cafemenu,db.cafecategory]
             })
-            const cafeMenuItems = selectedCafe.cafemenus
-            const associatedCategories = selectedCafe.cafecategories
-            res.render('cafes/show.ejs', {error: null, cafeMenuArr: cafeMenuItems, categoryArr: associatedCategories,selectedCafe,mapkey: process.env.MAPBOX_API_TOKEN})
+            if(!selectedCafe) {
+                res.render('users/profile.ejs', {error: "Unauthorized action"})
+            } else {
+                const cafeMenuItems = selectedCafe.cafemenus
+                const associatedCategories = selectedCafe.cafecategories
+                res.render('cafes/show.ejs', {error: null, cafeMenuArr: cafeMenuItems, categoryArr: associatedCategories,selectedCafe,mapkey: process.env.MAPBOX_API_TOKEN})
+            }
         } catch (error) {
             console.log(error)
         }
@@ -217,12 +240,16 @@ router.get('/:id/addcategory', async (req,res)=>{
             const selectedCafe = await db.cafe.findOne({
                 where: {id: req.params.id}
             })
-            const categories = await db.cafecategory.findAll({
-                where: {userId: res.locals.currentUser.id},
-                include: [db.cafe]
-            })
-            // let ejsOption = {async: true}
-            res.render('cafes/addcategory.ejs', {error: null, selectedCafe, categoryArr: categories})
+            if(selectedCafe.userId !== res.locals.currentUser.id) {
+                res.render('users/profile.ejs', {error: "Unauthorized action"})
+            } else {
+                const categories = await db.cafecategory.findAll({
+                    where: {userId: res.locals.currentUser.id},
+                    include: [db.cafe]
+                })
+                // let ejsOption = {async: true}
+                res.render('cafes/addcategory.ejs', {error: null, selectedCafe, categoryArr: categories})
+            }
         } catch (error) {
             console.log(error)
         }
@@ -307,7 +334,7 @@ router.delete('/:id', async (req,res) => {
     if(res.locals.currentUser) {
         try {
             await db.cafe.destroy({
-                where: {id: req.params.id}
+                where: {id: req.params.id, userId: res.locals.currentUser.id}
             })
             res.redirect('/cafes')
         } catch (error) {

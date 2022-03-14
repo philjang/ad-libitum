@@ -11,7 +11,7 @@ router.get('/', async (req,res)=>{
             const restaurants = await db.restaurant.findAll({
                 where: {userId: res.locals.currentUser.id}
             })
-            res.render('restaurants/index.ejs', {restaurantArr: restaurants, error: null})
+            res.render('restaurants/index.ejs', {restaurantArr: restaurants})
         } catch (error) {
             console.log(error)
         }
@@ -70,7 +70,7 @@ router.put('/:id', async (req,res)=>{
                 note: req.body.note,
                 rating: req.body.rating
             },{
-                where: {id: req.params.id}
+                where: {id: req.params.id,userId:res.locals.currentUser.id}
             })
             res.redirect(`/restaurants/${req.params.id}`)
         } catch (error) {
@@ -90,8 +90,12 @@ router.get('/edit/:id', async (req,res)=>{
                 },
                 include: [db.menu]
             })
-            const menuItems = selectedRestaurant.menus
-            res.render('restaurants/edit.ejs', {menuArr: menuItems, selectedRestaurant})
+            if (!selectedRestaurant) {
+                res.render('users/profile.ejs', {error: "Unauthorized action"})
+            } else {
+                const menuItems = selectedRestaurant.menus
+                res.render('restaurants/edit.ejs', {menuArr: menuItems, selectedRestaurant})
+            }
         } catch (error) {
             console.log(error)
         }
@@ -102,9 +106,13 @@ router.get('/edit/:id', async (req,res)=>{
 router.get('/:id/map', async (req,res) => {
     if (res.locals.currentUser) {
         const foundRestaurant = await db.restaurant.findOne({
-            where: {id: req.params.id}
+            where: {id: req.params.id,userId:res.locals.currentUser.id}
         })
-        res.render('restaurants/map.ejs', {restaurantId: foundRestaurant.id, restaurantName: foundRestaurant.name, restaurantAddress: foundRestaurant.address})
+        if (!foundRestaurant) {
+            res.render('users/profile.ejs', {error: "Unauthorized action"})
+        } else {
+            res.render('restaurants/map.ejs', {restaurantId: foundRestaurant.id, restaurantName: foundRestaurant.name, restaurantAddress: foundRestaurant.address})
+        }
     } else res.redirect('/')
 })
 
@@ -112,11 +120,18 @@ router.get('/:id/map', async (req,res) => {
 router.get('/mapresults', async (req,res) => {
     if (res.locals.currentUser) {
         try {
-            const retrievedJSON = await axios.get("https://api.mapbox.com/geocoding/v5/mapbox.places/"+req.query.name+" "+req.query.address+".json?limit=10&types=address%2Cpoi&access_token="+process.env.MAPBOX_API_TOKEN)
-            const resultsArr = retrievedJSON.data.features
-            // console.log(resultsArr)
-            // console.log(retrievedJSON)
-            res.render('restaurants/mapresults.ejs', {resultsArr, restaurantId: req.query.id})
+            const foundRestaurant = await db.restaurant.findOne({
+                where: {id: req.query.id}
+            })
+            if(foundRestaurant.userId !== res.locals.currentUser.id) {
+                res.render('users/profile.ejs', {error: "Unauthorized action"})
+            } else {
+                const retrievedJSON = await axios.get("https://api.mapbox.com/geocoding/v5/mapbox.places/"+req.query.name+" "+req.query.address+".json?limit=10&types=address%2Cpoi&access_token="+process.env.MAPBOX_API_TOKEN)
+                const resultsArr = retrievedJSON.data.features
+                // console.log(resultsArr)
+                // console.log(retrievedJSON)
+                res.render('restaurants/mapresults.ejs', {resultsArr, restaurantId: req.query.id})
+            }
         } catch (error) {
             console.log(error)
         }
@@ -131,7 +146,7 @@ router.put('/:id/map', async (req,res) => {
             await db.restaurant.update({
                 coordinates: {type: 'Point', coordinates: [req.body.lon, req.body.lat], crs: { type: 'name', properties: { name: 'EPSG:4326'} } }
             }, {
-                where: {id: req.params.id}
+                where: {id: req.params.id, userId: res.locals.currentUser.id}
             })
             console.log(`restaurant with id #${req.params.id} updated with new coordinates: ${req.body.lon}, ${req.body.lat}`.brightCyan)
             res.redirect(`/restaurants/${req.params.id}`)
@@ -182,8 +197,12 @@ router.get('/:id/newmenu', async (req,res) => {
             const foundRestaurant = await db.restaurant.findOne({
                 where: {id: req.params.id}
             })
-            const restaurantName = foundRestaurant.name
-            res.render('restaurants/newmenu.ejs', {restaurantId: req.params.id, restaurantName})
+            if(foundRestaurant.userId !== res.locals.currentUser.id) {
+                res.render('users/profile.ejs', {error: "Unauthorized action"})
+            } else {
+                const restaurantName = foundRestaurant.name
+                res.render('restaurants/newmenu.ejs', {restaurantId: req.params.id, restaurantName})
+            }
         } catch (error) {
             console.log(error)
         }
@@ -201,9 +220,13 @@ router.get('/:id', async (req,res)=>{
                 },
                 include: [db.menu,db.category]
             })
-            const menuItems = selectedRestaurant.menus
-            const associatedCategories = selectedRestaurant.categories
-            res.render('restaurants/show.ejs', {error: null, menuArr: menuItems, categoryArr: associatedCategories,selectedRestaurant,mapkey: process.env.MAPBOX_API_TOKEN})
+            if(!selectedRestaurant) {
+                res.render('users/profile.ejs', {error: "Unauthorized action"})
+            } else {
+                const menuItems = selectedRestaurant.menus
+                const associatedCategories = selectedRestaurant.categories
+                res.render('restaurants/show.ejs', {error: null, menuArr: menuItems, categoryArr: associatedCategories,selectedRestaurant,mapkey: process.env.MAPBOX_API_TOKEN})
+            }
         } catch (error) {
             console.log(error)
         }
@@ -217,12 +240,16 @@ router.get('/:id/addcategory', async (req,res)=>{
             const selectedRestaurant = await db.restaurant.findOne({
                 where: {id: req.params.id}
             })
-            const categories = await db.category.findAll({
-                where: {userId: res.locals.currentUser.id},
-                include: [db.restaurant]
-            })
-            // let ejsOption = {async: true}
-            res.render('restaurants/addcategory.ejs', {error: null, selectedRestaurant, categoryArr: categories})
+            if(selectedRestaurant.userId !== res.locals.currentUser.id) {
+                res.render('users/profile.ejs', {error: "Unauthorized action"})
+            } else {
+                const categories = await db.category.findAll({
+                    where: {userId: res.locals.currentUser.id},
+                    include: [db.restaurant]
+                })
+                // let ejsOption = {async: true}
+                res.render('restaurants/addcategory.ejs', {error: null, selectedRestaurant, categoryArr: categories})
+            }
         } catch (error) {
             console.log(error)
         }
@@ -307,7 +334,7 @@ router.delete('/:id', async (req,res) => {
     if(res.locals.currentUser) {
         try {
             await db.restaurant.destroy({
-                where: {id: req.params.id}
+                where: {id: req.params.id, userId: res.locals.currentUser.id}
             })
             res.redirect('/restaurants')
         } catch (error) {
